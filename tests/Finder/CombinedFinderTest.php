@@ -5,7 +5,7 @@ namespace Arubacao\AssetCdn\Test\Finder;
 class CombinedFinderTest extends TestCase
 {
     /** @test */
-    public function find_all_js_paths_and_backcss_and_robotstxt()
+    public function find_all_included_files()
     {
         $fileConfig = [
             'include' => [
@@ -15,17 +15,23 @@ class CombinedFinderTest extends TestCase
                 'files' => [
                     'css/back.css',
                     'robots.txt',
+                ],
+                'extensions' => [
+                    '.json'
                 ]
             ]
         ];
 
         $expectedFiles = [
-            'css/back.css',
-            'js/back.app.js',
-            'js/front.app.js',
-            'robots.txt',
-            'vendor/horizon/js/app.js',
-            'vendor/horizon/js/app.js.map',
+            "css/back.css",
+            "js/back.app.js",
+            "js/front.app.js",
+            "robots.txt",
+            "vendor/horizon/js/app.js",
+            "vendor/horizon/js/app.js.map",
+            "manifest.json",
+            "mix-manifest.json",
+            "vendor/horizon/mix-manifest.json",
         ];
 
         $this->assertFilesMatchConfig($expectedFiles, $fileConfig);
