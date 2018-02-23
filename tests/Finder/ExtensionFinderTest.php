@@ -18,7 +18,7 @@ class ExtensionFinderTest extends TestCase
             ],
             1 => [
                 'include' => [
-                    'files' => [
+                    'extensions' => [
                         'js',
                         'php',
                     ]

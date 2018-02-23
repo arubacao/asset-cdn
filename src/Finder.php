@@ -147,7 +147,7 @@ class Finder
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
         foreach ($this->config->getExcludedPatterns() as $pattern) {
-            $finder->name($pattern);
+            $finder->notName($pattern);
         }
 
         return $finder;
