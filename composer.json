@@ -1,0 +1,39 @@
+{
+    "name": "arubacao/asset-cdn",
+    "description": "TODO",
+    "keywords": [
+        "todo"
+    ],
+    "homepage": "https://github.com/arubacao/asset-cdn",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christopher Lass",
+            "homepage": "https://github.com/arubacao"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.4",
+        "phpunit/phpunit": "~5.7|~6.0|~7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arubacao\\AssetCdn\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Arubacao\\AssetCdn\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Arubacao\\AssetCdn\\AssetCdnServiceProvider"
+            ]
+        }
+    }
+}
