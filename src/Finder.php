@@ -20,10 +20,6 @@ class Finder
     public function __construct(Config $config)
     {
         $this->config = $config;
-        $this->finder = SymfonyFinder::create()
-            ->files()
-            ->in($this->config->getPublicPath())
-        ;
     }
 
     /**
@@ -33,7 +29,13 @@ class Finder
      */
     public function getFiles()
     {
-        return $this->includedFiles();
+        $pathFinder = $this->excluded();
+        $nameFinder = clone $pathFinder;
+
+        $includedPaths = $this->includedPaths($pathFinder);
+        $includedNames = $this->includedNames($nameFinder);
+
+        return $this->mergeFileInfos($includedPaths, $includedNames);
     }
 
     private function getBaseFinder(): SymfonyFinder
@@ -46,34 +48,19 @@ class Finder
     }
 
     /**
-     * Get all of the files from the given directory (recursive).
-     *
+     * @param \Symfony\Component\Finder\Finder $pathFinder
      * @return \Symfony\Component\Finder\SplFileInfo[]
      */
-    private function includedFiles(): array
+    private function includedPaths(SymfonyFinder $pathFinder): array
     {
-        $pathFinder = $this->excluded();
-        $nameFinder = clone $pathFinder;
-
         /**
          * Include directories
          * @see http://symfony.com/doc/current/components/finder.html#location
          */
         $includedPaths = $this->config->getIncludedPaths();
         foreach ($includedPaths as $path) {
-            $nameFinder->path($path);
+            $pathFinder->path($path);
         }
-
-//        /**
-//         * Include directories
-//         * @see http://symfony.com/doc/current/components/finder.html#location
-//         */
-//        $includedPaths = $this->config->getIncludedPaths();
-//        $nameFinder->files()->filter(
-//            function (SplFileInfo $file) use ($includedPaths) {
-//                return in_array($file->getRelativePath(), $includedPaths);
-//            }
-//        );
 
         /**
          * Include Files
@@ -81,27 +68,46 @@ class Finder
          */
         $includedFiles = $this->config->getIncludedFiles();
         foreach ($includedFiles as $file) {
-            $nameFinder->path($file);
+            $pathFinder->path($file);
         }
 
         if(empty($includedPaths) && empty($includedFiles)) {
-            $nameFinder->notPath('');
+            $pathFinder->notPath('');
         }
 
+        return iterator_to_array(
+            $pathFinder,
+            false
+        );
+    }
+
+
+    /**
+     * @param \Symfony\Component\Finder\Finder $nameFinder
+     * @return \Symfony\Component\Finder\SplFileInfo[]
+     */
+    private function includedNames(SymfonyFinder $nameFinder): array
+    {
         /**
          * Include Extensions
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
-        foreach ($this->config->getIncludedExtensions() as $pattern) {
-            $nameFinder->name($pattern);
+        $includedExtensions = $this->config->getIncludedExtensions();
+        foreach ($includedExtensions as $extension) {
+            $nameFinder->name($extension);
         }
 
         /**
          * Include Patterns - globs, strings, or regexes
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
-        foreach ($this->config->getIncludedPatterns() as $pattern) {
+        $includedPatterns = $this->config->getIncludedPatterns();
+        foreach ($includedPatterns as $pattern) {
             $nameFinder->name($pattern);
+        }
+
+        if(empty($includedExtensions) && empty($includedPatterns)) {
+            $nameFinder->notPath('');
         }
 
         return iterator_to_array(
@@ -145,5 +151,20 @@ class Finder
         }
 
         return $finder;
+    }
+
+    /**
+     * @param \Symfony\Component\Finder\SplFileInfo[] $includedPaths
+     * @param \Symfony\Component\Finder\SplFileInfo[] $includedNames
+     * @return \Symfony\Component\Finder\SplFileInfo[]
+     */
+    private function mergeFileInfos(array $includedPaths, array $includedNames): array
+    {
+        return collect(array_merge($includedPaths, $includedNames))
+            ->unique(function (SplFileInfo $file) {
+                return $file->getPathname();
+            })
+            ->values()
+            ->toArray();
     }
 }
