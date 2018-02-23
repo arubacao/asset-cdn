@@ -69,4 +69,44 @@ class FileFinderTest extends TestCase
             $this->assertFilesMatchConfig($expectedFiles, $fileConfig);
         }
     }
+
+    /** @test */
+    public function find_all_fontawesomeotf_exclude_one()
+    {
+        $fileConfigs = [
+            0 => [
+                'include' => [
+                    'files' => [
+                        'FontAwesome.otf',
+                    ]
+                ],
+                'exclude' => [
+                    'files' => [
+                        'fonts/fontawesome/FontAwesome.otf',
+                    ]
+                ]
+            ],
+            1 => [
+                'include' => [
+                    'files' => [
+                        '/FontAwesome.otf',
+                    ]
+                ],
+                'exclude' => [
+                    'files' => [
+                        '/fonts/fontawesome/FontAwesome.otf',
+                    ]
+                ]
+            ]
+        ];
+
+        $expectedFiles = [
+            'fonts/FontAwesome.otf',
+            'fonts/vendor/fontawesome/FontAwesome.otf',
+        ];
+
+        foreach ($fileConfigs as $fileConfig) {
+            $this->assertFilesMatchConfig($expectedFiles, $fileConfig);
+        }
+    }
 }
