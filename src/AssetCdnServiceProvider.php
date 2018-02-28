@@ -26,7 +26,7 @@ class AssetCdnServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/asset-cdn.php', 'asset-cdn');
 
         $this->app->singleton(Finder::class, function ($app) {
-            return new Finder(new Config($app));
+            return new Finder(new Config($app->make('config'), $app->make('path.public')));
         });
     }
 }

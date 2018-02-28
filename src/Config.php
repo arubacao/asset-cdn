@@ -2,7 +2,7 @@
 
 namespace Arubacao\AssetCdn;
 
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Config\Repository;
 
 class Config
 {
@@ -20,12 +20,13 @@ class Config
     private $publicPath;
 
     /**
-     * @param \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param string $publicPath
      */
-    public function __construct(Application $app)
+    public function __construct(Repository $config, string $publicPath)
     {
-        $this->config = $app->make('config')->get('asset-cdn.files');
-        $this->publicPath = $app->make('path.public');
+        $this->config = $config->get('asset-cdn.files');
+        $this->publicPath = $publicPath;
     }
 
     public function ignoreDotFiles(): bool
