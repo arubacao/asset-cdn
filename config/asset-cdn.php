@@ -6,7 +6,6 @@ return [
 
     'filesystem' => 'minio',
 
-
     'files' => [
 
         // Excludes "hidden" directories and files (starting with a dot).

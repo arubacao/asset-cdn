@@ -3,6 +3,7 @@
 namespace Arubacao\AssetCdn;
 
 use Illuminate\Support\ServiceProvider;
+use Arubacao\AssetCdn\Commands\PushCommand;
 
 class AssetCdnServiceProvider extends ServiceProvider
 {
@@ -30,5 +31,11 @@ class AssetCdnServiceProvider extends ServiceProvider
         $this->app->singleton(Finder::class, function ($app) {
             return new Finder(new Config($app->make('config'), $app->make('path.public')));
         });
+
+        $this->app->bind('command.asset-cdn:push', PushCommand::class);
+
+        $this->commands([
+            'command.asset-cdn:push',
+        ]);
     }
 }
