@@ -57,13 +57,13 @@ abstract class TestCase extends Orchestra
 //            'root' => $this->getMediaDirectory(),
 //        ]);
         $app['config']->set('app.key', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-        $app['config']->set('asset-cdn.filesystem', 'test_filesystem');
         $app['config']->set('filesystems.disks.test_filesystem', [
             'driver' => 'local',
             'root' => $this->tempDir->path(),
         ]);
+        $app['config']->set('asset-cdn.filesystem', 'test_filesystem');
         $app->bind('path.public', function () {
-            return __DIR__.'/public';
+            return __DIR__.'/testfiles/public';
         });
     }
 

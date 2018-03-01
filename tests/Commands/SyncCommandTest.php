@@ -2,12 +2,13 @@
 
 namespace Arubacao\AssetCdn\Test\Commands;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
 
 class SyncCommandTest extends TestCase
 {
     /** @test */
-    public function command_syncs_all_js_paths_to_cdn()
+    public function command_syncs_all_js_paths_and_deletes_css_files_to_cdn()
     {
         $this->seedLocalCdnFilesystem([
             [

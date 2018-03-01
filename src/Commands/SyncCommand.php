@@ -47,7 +47,7 @@ class SyncCommand extends BaseCommand
     {
         $this->filesystem = $config->get('asset-cdn.filesystem');
         $this->filesystemManager = $filesystemManager;
-        $filesOnCdn = $filesystemManager
+        $filesOnCdn = $this->filesystemManager
             ->disk($this->filesystem)
             ->allFiles();
         $localFiles = $finder->getFiles();
