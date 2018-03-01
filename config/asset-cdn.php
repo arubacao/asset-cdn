@@ -4,7 +4,7 @@ return [
 
     'use_cdn' => env('USE_CDN', false),
 
-    'filesystem' => 'minio',
+    'filesystem' => 'asset-cdn',
 
     'files' => [
 
