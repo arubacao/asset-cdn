@@ -41,7 +41,7 @@ class TestCase extends \Arubacao\AssetCdn\Test\TestCase
             $dest = "{$cdnPath}/{$file['path']}/{$file['filename']}";
             copy($source, $dest);
             // Preserve modified timestamp of original file
-            touch($dest, filemtime($source));
+            touch($dest, $file['last_modified'] ?? filemtime($source));
         }
     }
 

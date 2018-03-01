@@ -2,8 +2,9 @@
 
 namespace Arubacao\AssetCdn\Test\Commands;
 
-use Illuminate\Http\UploadedFile;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class SyncCommandTest extends TestCase
 {
@@ -44,4 +45,40 @@ class SyncCommandTest extends TestCase
 
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
     }
+
+    /** @test */
+    public function command_syncs_files_with_different_modified_timestamps()
+    {
+        $time = Carbon::createFromFormat('Y-m-d', '2017-01-01')->timestamp;
+
+        $this->seedLocalCdnFilesystem([
+            [
+                'path' => 'css',
+                'filename' => 'front.css',
+                'last_modified' => $time,
+            ]
+        ]);
+
+        $this->setFilesInConfig([
+            'include' => [
+                'files' => [
+                    'css/front.css',
+                ]
+            ]
+        ]);
+
+        $expectedFiles = [
+            'css/front.css',
+        ];
+
+        Artisan::call('asset-cdn:sync');
+
+        $this->assertFilesExistOnCdnFilesystem($expectedFiles);
+
+        $modified = Storage::disk('test_filesystem')
+            ->lastModified('css/front.css');
+
+        $this->assertNotEquals($time, $modified);
+    }
+
 }
