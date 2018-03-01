@@ -81,4 +81,36 @@ class SyncCommandTest extends TestCase
         $this->assertNotEquals($time, $modified);
     }
 
+    /** @test */
+    public function command_does_not_sync_files_with_different_same_timestamps()
+    {
+        $this->seedLocalCdnFilesystem([
+            [
+                'path' => 'css',
+                'filename' => 'front.css',
+            ]
+        ]);
+
+        $this->setFilesInConfig([
+            'include' => [
+                'files' => [
+                    'css/front.css',
+                ]
+            ]
+        ]);
+
+        $expectedFiles = [
+            'css/front.css',
+        ];
+
+        Artisan::call('asset-cdn:sync');
+
+        $this->assertFilesExistOnCdnFilesystem($expectedFiles);
+
+        $modified = Storage::disk('test_filesystem')
+            ->lastModified('css/front.css');
+
+        $this->assertEquals(filemtime(public_path('css/front.css')), $modified);
+    }
+
 }
