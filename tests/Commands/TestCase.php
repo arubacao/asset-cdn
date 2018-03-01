@@ -2,6 +2,7 @@
 namespace Arubacao\AssetCdn\Test\Commands;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class TestCase extends \Arubacao\AssetCdn\Test\TestCase
 {
@@ -10,6 +11,11 @@ class TestCase extends \Arubacao\AssetCdn\Test\TestCase
      */
     protected function assertFilesExistOnCdnFilesystem($expectedFiles)
     {
+        // Assert the file was stored...
+        foreach ($expectedFiles as $expectedFile) {
+            Storage::disk('test_filesystem')->assertExists($expectedFile);
+        }
+
         /** @var \Symfony\Component\Finder\SplFileInfo[] $actualFiles */
         $actualFiles = File::allFiles(config('filesystems.disks.test_filesystem.root'));
         $actualFiles = array_map(function ($file) {

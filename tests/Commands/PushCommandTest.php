@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 class PushCommandTest extends TestCase
 {
     /** @test */
-    public function pushworker()
+    public function command_pushes_all_js_paths_to_cdn()
     {
         $this->setFilesInConfig([
             'include' => [
