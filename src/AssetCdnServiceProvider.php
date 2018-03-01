@@ -2,6 +2,7 @@
 
 namespace Arubacao\AssetCdn;
 
+use Arubacao\AssetCdn\Commands\SyncCommand;
 use Illuminate\Support\ServiceProvider;
 use Arubacao\AssetCdn\Commands\PushCommand;
 
@@ -33,9 +34,11 @@ class AssetCdnServiceProvider extends ServiceProvider
         });
 
         $this->app->bind('command.asset-cdn:push', PushCommand::class);
+        $this->app->bind('command.asset-cdn:sync', SyncCommand::class);
 
         $this->commands([
             'command.asset-cdn:push',
+            'command.asset-cdn:sync',
         ]);
     }
 }
