@@ -37,7 +37,8 @@ class TestCase extends \Arubacao\AssetCdn\Test\TestCase
             if (!file_exists("{$cdnPath}/{$file['path']}")) {
                 mkdir("{$cdnPath}/{$file['path']}", 0777, true);
             }
-            $source = public_path("{$file['path']}/{$file['filename']}");
+            $srcPath = $file['base'] ?? public_path();
+            $source = "{$srcPath}/{$file['path']}/{$file['filename']}";
             $dest = "{$cdnPath}/{$file['path']}/{$file['filename']}";
             copy($source, $dest);
             // Preserve modified timestamp of original file

@@ -47,7 +47,7 @@ class SyncCommandTest extends TestCase
     }
 
     /** @test */
-    public function command_syncs_files_with_different_modified_timestamps()
+    public function command_syncs_files_with_different_modified_timestamps_but_same_size()
     {
         $time = Carbon::createFromFormat('Y-m-d', '2017-01-01')->timestamp;
 
@@ -82,7 +82,7 @@ class SyncCommandTest extends TestCase
     }
 
     /** @test */
-    public function command_does_not_sync_files_with_different_same_timestamps()
+    public function command_does_not_sync_files_with_same_timestamps_and_same_size()
     {
         $this->seedLocalCdnFilesystem([
             [
@@ -113,4 +113,46 @@ class SyncCommandTest extends TestCase
         $this->assertEquals(filemtime(public_path('css/front.css')), $modified);
     }
 
+    /** @test */
+    public function command_syncs_files_with_same_modified_timestamps_but_different_size()
+    {
+        $src = public_path('css/front.css');
+        $expectedFileSize = filesize($src);
+        $expectedFileMTime = filemtime($src);
+
+        $this->seedLocalCdnFilesystem([
+            [
+                'path' => 'css',
+                'filename' => 'front.css',
+                'base' => __DIR__.'/../testfiles/dummy',
+                'last_modified' => $expectedFileMTime,
+            ]
+        ]);
+
+        $this->assertNotEquals($expectedFileSize,
+            Storage::disk('test_filesystem')
+                ->size('css/front.css')
+            );
+
+        $this->setFilesInConfig([
+            'include' => [
+                'files' => [
+                    'css/front.css',
+                ]
+            ]
+        ]);
+
+        $expectedFiles = [
+            'css/front.css',
+        ];
+
+        Artisan::call('asset-cdn:sync');
+
+        $this->assertFilesExistOnCdnFilesystem($expectedFiles);
+
+        $this->assertEquals($expectedFileSize,
+            Storage::disk('test_filesystem')
+                ->size('css/front.css')
+        );
+    }
 }
