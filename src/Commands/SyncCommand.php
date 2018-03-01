@@ -4,12 +4,11 @@ namespace Arubacao\AssetCdn\Commands;
 
 use Illuminate\Http\File;
 use Arubacao\AssetCdn\Finder;
-use Illuminate\Console\Command;
 use Illuminate\Config\Repository;
 use Illuminate\Filesystem\FilesystemManager;
 use Symfony\Component\Finder\SplFileInfo;
 
-class SyncCommand extends Command
+class SyncCommand extends BaseCommand
 {
     /**
      * The name and signature of the console command.
@@ -129,16 +128,5 @@ class SyncCommand extends Command
         });
 
         return array_values($array);
-    }
-
-    /**
-     * @param \Symfony\Component\Finder\SplFileInfo[] $files
-     * @return array
-     */
-    private function mapToPathname(array $files): array
-    {
-        return array_map(function (SplFileInfo $file) {
-            return $file->getRelativePathname();
-        }, $files);
     }
 }

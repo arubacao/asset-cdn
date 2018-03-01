@@ -4,11 +4,10 @@ namespace Arubacao\AssetCdn\Commands;
 
 use Illuminate\Http\File;
 use Arubacao\AssetCdn\Finder;
-use Illuminate\Console\Command;
 use Illuminate\Config\Repository;
 use Illuminate\Filesystem\FilesystemManager;
 
-class PushCommand extends Command
+class PushCommand extends BaseCommand
 {
     /**
      * The name and signature of the console command.
