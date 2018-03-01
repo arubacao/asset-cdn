@@ -8,6 +8,8 @@ class AssetCdnServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application events.
+     *
+     * @return void
      */
     public function boot()
     {
