@@ -75,3 +75,4 @@ fabric.properties
 
 /composer.lock
 /.php_cs.cache
+/coverage/
