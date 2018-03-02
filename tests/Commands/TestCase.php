@@ -22,6 +22,12 @@ class TestCase extends \Arubacao\AssetCdn\Test\TestCase
             return $file->getRelativePathname();
         }, $actualFiles);
 
+        // Sort the arrays
+        asort($actualFiles);
+        asort($expectedFiles);
+        $actualFiles = array_values($actualFiles);
+        $expectedFiles = array_values($expectedFiles);
+
         $this->assertArraySubset($expectedFiles, $actualFiles);
         $this->assertCount(count($expectedFiles), $actualFiles);
     }

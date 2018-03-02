@@ -19,6 +19,12 @@ class TestCase extends \Arubacao\AssetCdn\Test\TestCase
             return $file->getRelativePathname();
         }, $actualFiles);
 
+        // Sort the arrays
+        asort($actualFiles);
+        asort($expectedFiles);
+        $actualFiles = array_values($actualFiles);
+        $expectedFiles = array_values($expectedFiles);
+
 //        dd($actualFiles);
 
         $this->assertArraySubset($expectedFiles, $actualFiles);
