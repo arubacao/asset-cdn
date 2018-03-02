@@ -5,7 +5,9 @@ RUN apt-get update && \
         git \
         unzip \
         vim \
-        libicu-dev
+        libicu-dev && \
+    pecl install xdebug && \
+    docker-php-ext-enable xdebug
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /tmp
