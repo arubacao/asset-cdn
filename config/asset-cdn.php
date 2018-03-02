@@ -4,7 +4,14 @@ return [
 
     'use_cdn' => env('USE_CDN', false),
 
-    'filesystem' => 'asset-cdn',
+    'filesystem' => [
+
+        'disk' => 'asset-cdn',
+
+        'options' => [
+
+        ],
+    ],
 
     'files' => [
 

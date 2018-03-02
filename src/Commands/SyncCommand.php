@@ -45,7 +45,7 @@ class SyncCommand extends BaseCommand
      */
     public function handle(Finder $finder, FilesystemManager $filesystemManager, Repository $config)
     {
-        $this->filesystem = $config->get('asset-cdn.filesystem');
+        $this->filesystem = $config->get('asset-cdn.filesystem.disk');
         $this->filesystemManager = $filesystemManager;
         $filesOnCdn = $this->filesystemManager
             ->disk($this->filesystem)

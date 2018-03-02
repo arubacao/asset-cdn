@@ -38,7 +38,7 @@ class PushCommand extends BaseCommand
 
         foreach ($files as $file) {
             $bool = $filesystemManager
-                ->disk($config->get('asset-cdn.filesystem'))
+                ->disk($config->get('asset-cdn.filesystem.disk'))
                 ->putFileAs(
                     $file->getRelativePath(),
                     new File($file->getPathname()),

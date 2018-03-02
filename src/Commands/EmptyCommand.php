@@ -31,7 +31,7 @@ class EmptyCommand extends BaseCommand
      */
     public function handle(FilesystemManager $filesystemManager, Repository $config)
     {
-        $filesystem = $config->get('asset-cdn.filesystem');
+        $filesystem = $config->get('asset-cdn.filesystem.disk');
         $filesOnCdn = $filesystemManager
             ->disk($filesystem)
             ->allFiles();
