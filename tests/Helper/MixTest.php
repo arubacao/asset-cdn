@@ -12,17 +12,27 @@ class MixTest extends TestCase
     public function mix_cdn_falls_back_to_mix_if_disabled()
     {
         $this->app['config']->set('asset-cdn.use_cdn', false);
-        $url = mix_cdn('js/back.app.js');
-        $this->assertInstanceOf('Illuminate\Support\HtmlString', $url);
-        $this->assertSame('/js/back.app.js?id=0dd41baa9f9a73f1dd97', $url->toHtml());
+        $urls = [
+            mix_cdn('js/back.app.js'),
+            mix_cdn('/js/back.app.js'),
+        ];
+        foreach ($urls as $url) {
+            $this->assertInstanceOf('Illuminate\Support\HtmlString', $url);
+            $this->assertSame('/js/back.app.js?id=0dd41baa9f9a73f1dd97', $url->toHtml());
+        }
     }
 
     /** @test */
     public function mix_cdn_returns_correct_url()
     {
-        $url = mix_cdn('js/back.app.js');
-        $this->assertInstanceOf('Illuminate\Support\HtmlString', $url);
-        $this->assertSame('http://cdn.localhost/js/back.app.js?id=0dd41baa9f9a73f1dd97', $url->toHtml());
+        $urls = [
+            mix_cdn('js/back.app.js'),
+            mix_cdn('/js/back.app.js'),
+        ];
+        foreach ($urls as $url) {
+            $this->assertInstanceOf('Illuminate\Support\HtmlString', $url);
+            $this->assertSame('http://cdn.localhost/js/back.app.js?id=0dd41baa9f9a73f1dd97', $url->toHtml());
+        }
     }
 
     /** @test */
