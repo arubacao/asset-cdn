@@ -61,7 +61,11 @@ abstract class TestCase extends Orchestra
             'driver' => 'local',
             'root' => $this->tempDir->path(),
         ]);
+
+        $app['config']->set('asset-cdn.use_cdn', true);
+        $app['config']->set('asset-cdn.cdn_url', 'http://cdn.localhost');
         $app['config']->set('asset-cdn.filesystem.disk', 'test_filesystem');
+
         $app->bind('path.public', function () {
             return __DIR__.'/testfiles/public';
         });
@@ -89,11 +93,11 @@ abstract class TestCase extends Orchestra
         $files = array_merge_recursive($emptyConfig, $config);
         $result = [
             'use_cdn' => true,
+            'cdn_url' => 'http://cdn.localhost',
             'filesystem' => [
                 'disk' => 'test_filesystem',
                 'options' => [],
             ],
-            'url' => 'http://cdn.localhost',
             'files' => $files
         ];
 
