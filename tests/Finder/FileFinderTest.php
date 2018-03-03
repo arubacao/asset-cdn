@@ -14,8 +14,8 @@ class FileFinderTest extends TestCase
                         'js/back.app.js',
                         'img/layout/ph3x2.png',
                         'mstile-150x150.png',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
@@ -23,9 +23,9 @@ class FileFinderTest extends TestCase
                         '/js/back.app.js',
                         '/img/layout/ph3x2.png',
                         '/mstile-150x150.png',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [
@@ -47,16 +47,16 @@ class FileFinderTest extends TestCase
                 'include' => [
                     'files' => [
                         'FontAwesome.otf',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
                     'files' => [
                         '/FontAwesome.otf',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [
@@ -78,26 +78,26 @@ class FileFinderTest extends TestCase
                 'include' => [
                     'files' => [
                         'FontAwesome.otf',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'files' => [
                         'fonts/fontawesome/FontAwesome.otf',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
                     'files' => [
                         '/FontAwesome.otf',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'files' => [
                         '/fonts/fontawesome/FontAwesome.otf',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [

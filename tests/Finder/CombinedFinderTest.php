@@ -17,21 +17,21 @@ class CombinedFinderTest extends TestCase
                     'robots.txt',
                 ],
                 'extensions' => [
-                    '.json'
-                ]
-            ]
+                    '.json',
+                ],
+            ],
         ];
 
         $expectedFiles = [
-            "css/back.css",
-            "js/back.app.js",
-            "js/front.app.js",
-            "robots.txt",
-            "vendor/horizon/js/app.js",
-            "vendor/horizon/js/app.js.map",
-            "manifest.json",
-            "mix-manifest.json",
-            "vendor/horizon/mix-manifest.json",
+            'css/back.css',
+            'js/back.app.js',
+            'js/front.app.js',
+            'robots.txt',
+            'vendor/horizon/js/app.js',
+            'vendor/horizon/js/app.js.map',
+            'manifest.json',
+            'mix-manifest.json',
+            'vendor/horizon/mix-manifest.json',
         ];
 
         $this->assertFilesMatchConfig($expectedFiles, $fileConfig);
@@ -48,7 +48,7 @@ class CombinedFinderTest extends TestCase
                 'files' => [
                     'css/back.css',
                     'robots.txt',
-                ]
+                ],
             ],
             'exclude' => [
                 'paths' => [
@@ -56,8 +56,8 @@ class CombinedFinderTest extends TestCase
                 ],
                 'files' => [
                     'js/back.app.js',
-                ]
-            ]
+                ],
+            ],
         ];
 
         $expectedFiles = [
@@ -68,5 +68,4 @@ class CombinedFinderTest extends TestCase
 
         $this->assertFilesMatchConfig($expectedFiles, $fileConfig);
     }
-
 }

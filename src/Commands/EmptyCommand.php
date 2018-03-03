@@ -36,7 +36,7 @@ class EmptyCommand extends BaseCommand
             ->disk($filesystem)
             ->allFiles();
 
-        if($filesystemManager
+        if ($filesystemManager
             ->disk($filesystem)
             ->delete($filesOnCdn)) {
             foreach ($filesOnCdn as $file) {

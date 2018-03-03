@@ -13,17 +13,17 @@ class ExtensionFinderTest extends TestCase
                     'extensions' => [
                         '.js',
                         '.php',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
                     'extensions' => [
                         'js',
                         'php',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [
@@ -47,27 +47,27 @@ class ExtensionFinderTest extends TestCase
                     'extensions' => [
                         '.js',
                         '.php',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'extensions' => [
                         '.php',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
                     'extensions' => [
                         'js',
                         'php',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'extensions' => [
                         'php',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [

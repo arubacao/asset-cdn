@@ -15,7 +15,7 @@ if (! function_exists('mix_cdn')) {
      */
     function mix_cdn($path, $manifestDirectory = '')
     {
-        if(! config('asset-cdn.use_cdn')) {
+        if (! config('asset-cdn.use_cdn')) {
             return mix($path, $manifestDirectory);
         }
 
@@ -67,7 +67,7 @@ if (! function_exists('asset_cdn')) {
      */
     function asset_cdn($path)
     {
-        if(! config('asset-cdn.use_cdn')) {
+        if (! config('asset-cdn.use_cdn')) {
             return asset($path);
         }
 

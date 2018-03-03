@@ -14,8 +14,8 @@ class PushCommandTest extends TestCase
             'include' => [
                 'paths' => [
                     'js',
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $expectedFiles = [
@@ -37,12 +37,12 @@ class PushCommandTest extends TestCase
             'include' => [
                 'files' => [
                     'css/front.css',
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $expectedOptions = [
-            'foo' => 'bar'
+            'foo' => 'bar',
         ];
 
         $this->app['config']->set('asset-cdn.filesystem.options', $expectedOptions);
@@ -57,6 +57,7 @@ class PushCommandTest extends TestCase
                     array $options
                 ) use ($expectedOptions) {
                     $this->assertArraySubset($expectedOptions, $options);
+
                     return true;
                 }
             )

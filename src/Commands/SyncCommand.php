@@ -5,8 +5,8 @@ namespace Arubacao\AssetCdn\Commands;
 use Illuminate\Http\File;
 use Arubacao\AssetCdn\Finder;
 use Illuminate\Config\Repository;
-use Illuminate\Filesystem\FilesystemManager;
 use Symfony\Component\Finder\SplFileInfo;
+use Illuminate\Filesystem\FilesystemManager;
 
 class SyncCommand extends BaseCommand
 {
@@ -64,14 +64,14 @@ class SyncCommand extends BaseCommand
                     $config->get('asset-cdn.filesystem.options')
                 );
 
-            if (!$bool) {
+            if (! $bool) {
                 $this->error("Problem uploading: {$file->getRelativePath()}");
             } else {
                 $this->info("Successfully uploaded: {$file->getRelativePath()}");
             }
         }
 
-        if($this->filesystemManager
+        if ($this->filesystemManager
             ->disk($this->filesystem)
             ->delete($filesToDelete)) {
             foreach ($filesToDelete as $file) {
@@ -89,7 +89,7 @@ class SyncCommand extends BaseCommand
     {
         $array = array_filter($localFiles, function (SplFileInfo $localFile) use ($filesOnCdn) {
             $localFilePathname = $localFile->getRelativePathname();
-            if(! in_array($localFilePathname, $filesOnCdn)) {
+            if (! in_array($localFilePathname, $filesOnCdn)) {
                 return true;
             }
 
@@ -97,7 +97,7 @@ class SyncCommand extends BaseCommand
                 ->disk($this->filesystem)
                 ->lastModified($localFilePathname);
 
-            if($lastModifiedOnCdn != $localFile->getMTime()) {
+            if ($lastModifiedOnCdn != $localFile->getMTime()) {
                 return true;
             }
 
@@ -105,7 +105,7 @@ class SyncCommand extends BaseCommand
                 ->disk($this->filesystem)
                 ->size($localFilePathname);
 
-            if($filesizeOfCdn != $localFile->getSize()) {
+            if ($filesizeOfCdn != $localFile->getSize()) {
                 return true;
             }
 

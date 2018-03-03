@@ -12,23 +12,23 @@ class PathFinderTest extends TestCase
                 'include' => [
                     'paths' => [
                         'js',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
                     'paths' => [
                         '/js',
-                    ]
-                ]
+                    ],
+                ],
             ],
             2 => [
                 'include' => [
                     'paths' => [
                         'js/',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [
@@ -51,50 +51,50 @@ class PathFinderTest extends TestCase
                 'include' => [
                     'paths' => [
                         'js',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'paths' => [
                         'vendor/horizon/js',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
                     'paths' => [
                         '/js',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'paths' => [
                         '/vendor/horizon/js',
-                    ]
-                ]
+                    ],
+                ],
             ],
             2 => [
                 'include' => [
                     'paths' => [
                         'js/',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'paths' => [
                         'vendor/horizon/js/',
-                    ]
-                ]
+                    ],
+                ],
             ],
             3 => [
                 'include' => [
                     'paths' => [
                         '/js/',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'paths' => [
                         '/vendor/horizon/js/',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [
@@ -115,23 +115,23 @@ class PathFinderTest extends TestCase
                 'include' => [
                     'paths' => [
                         'vendor/horizon/img',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
                     'paths' => [
                         '/vendor/horizon/img',
-                    ]
-                ]
+                    ],
+                ],
             ],
             2 => [
                 'include' => [
                     'paths' => [
                         'vendor/horizon/img/',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [
@@ -153,25 +153,25 @@ class PathFinderTest extends TestCase
                     'paths' => [
                         'vendor/horizon/img',
                         'images/svg',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
                     'paths' => [
                         '/vendor/horizon/img',
                         '/images/svg',
-                    ]
-                ]
+                    ],
+                ],
             ],
             2 => [
                 'include' => [
                     'paths' => [
                         'vendor/horizon/img/',
                         'images/svg/',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [
@@ -194,53 +194,53 @@ class PathFinderTest extends TestCase
                     'paths' => [
                         'vendor/horizon/img',
                         'images',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'paths' => [
                         'images/svg',
-                    ]
-                ]
+                    ],
+                ],
             ],
             1 => [
                 'include' => [
                     'paths' => [
                         '/vendor/horizon/img',
                         '/images',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'paths' => [
                         '/images/svg',
-                    ]
-                ]
+                    ],
+                ],
             ],
             2 => [
                 'include' => [
                     'paths' => [
                         'vendor/horizon/img/',
                         'images/',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'paths' => [
                         'images/svg/',
-                    ]
-                ]
+                    ],
+                ],
             ],
             3 => [
                 'include' => [
                     'paths' => [
                         '/vendor/horizon/img/',
                         '/images/',
-                    ]
+                    ],
                 ],
                 'exclude' => [
                     'paths' => [
                         '/images/svg/',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
 
         $expectedFiles = [
@@ -261,8 +261,8 @@ class PathFinderTest extends TestCase
     {
         $fileConfig = [
             'include' => [
-                'paths' => []
-            ]
+                'paths' => [],
+            ],
         ];
 
         $expectedFiles = [];

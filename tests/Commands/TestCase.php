@@ -1,4 +1,5 @@
 <?php
+
 namespace Arubacao\AssetCdn\Test\Commands;
 
 use Illuminate\Support\Facades\File;
@@ -40,7 +41,7 @@ class TestCase extends \Arubacao\AssetCdn\Test\TestCase
         $cdnPath = config('filesystems.disks.test_filesystem.root');
 
         foreach ($files as $file) {
-            if (!file_exists("{$cdnPath}/{$file['path']}")) {
+            if (! file_exists("{$cdnPath}/{$file['path']}")) {
                 mkdir("{$cdnPath}/{$file['path']}", 0777, true);
             }
             $srcPath = $file['base'] ?? public_path();

@@ -32,7 +32,6 @@ abstract class TestCase extends Orchestra
         parent::tearDown();
     }
 
-
     /**
      * Get package providers.
      *
@@ -98,10 +97,9 @@ abstract class TestCase extends Orchestra
                 'disk' => 'test_filesystem',
                 'options' => [],
             ],
-            'files' => $files
+            'files' => $files,
         ];
 
         $this->app->make('config')->set('asset-cdn', $result);
     }
-
 }

@@ -54,7 +54,7 @@ class Finder
     private function includedPaths(SymfonyFinder $pathFinder): array
     {
         /**
-         * Include directories
+         * Include directories.
          * @see http://symfony.com/doc/current/components/finder.html#location
          */
         $includedPaths = $this->config->getIncludedPaths();
@@ -63,7 +63,7 @@ class Finder
         }
 
         /**
-         * Include Files
+         * Include Files.
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
         $includedFiles = $this->config->getIncludedFiles();
@@ -71,7 +71,7 @@ class Finder
             $pathFinder->path($file);
         }
 
-        if(empty($includedPaths) && empty($includedFiles)) {
+        if (empty($includedPaths) && empty($includedFiles)) {
             $pathFinder->notPath('');
         }
 
@@ -81,7 +81,6 @@ class Finder
         );
     }
 
-
     /**
      * @param \Symfony\Component\Finder\Finder $nameFinder
      * @return \Symfony\Component\Finder\SplFileInfo[]
@@ -89,7 +88,7 @@ class Finder
     private function includedNames(SymfonyFinder $nameFinder): array
     {
         /**
-         * Include Extensions
+         * Include Extensions.
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
         $includedExtensions = $this->config->getIncludedExtensions();
@@ -98,7 +97,7 @@ class Finder
         }
 
         /**
-         * Include Patterns - globs, strings, or regexes
+         * Include Patterns - globs, strings, or regexes.
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
         $includedPatterns = $this->config->getIncludedPatterns();
@@ -106,7 +105,7 @@ class Finder
             $nameFinder->name($pattern);
         }
 
-        if(empty($includedExtensions) && empty($includedPatterns)) {
+        if (empty($includedExtensions) && empty($includedPatterns)) {
             $nameFinder->notPath('');
         }
 
@@ -120,13 +119,13 @@ class Finder
     {
         $finder = $this->getBaseFinder();
 
-        /**
+        /*
          * Exclude directories
          * @see http://symfony.com/doc/current/components/finder.html#location
          */
         $finder->exclude($this->config->getExcludedPaths());
 
-        /**
+        /*
          * Exclude Files
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
@@ -134,7 +133,7 @@ class Finder
             $finder->notPath($file);
         }
 
-        /**
+        /*
          * Exclude Extensions
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
@@ -142,7 +141,7 @@ class Finder
             $finder->notName($pattern);
         }
 
-        /**
+        /*
          * Exclude Patterns - globs, strings, or regexes
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */

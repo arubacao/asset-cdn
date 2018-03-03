@@ -103,7 +103,7 @@ class Config
     {
         return array_map(
             function ($extension) {
-                return '*' . $this->start($extension, '.');
+                return '*'.$this->start($extension, '.');
             },
             $this->config[$type]['extensions']
         );

@@ -1,4 +1,5 @@
 <?php
+
 namespace Arubacao\AssetCdn\Test\Finder;
 
 use Arubacao\AssetCdn\Finder;

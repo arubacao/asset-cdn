@@ -2,9 +2,8 @@
 
 namespace Arubacao\AssetCdn\Test\Helper;
 
-
-use Arubacao\AssetCdn\Test\TestCase;
 use Illuminate\Support\Facades\Log;
+use Arubacao\AssetCdn\Test\TestCase;
 
 class MixTest extends TestCase
 {
@@ -42,7 +41,8 @@ class MixTest extends TestCase
             ->once()
             ->withArgs(
                 function ($message) {
-                    $this->assertSame("Unable to locate Mix file: /js/unknown.app.js.", $message);
+                    $this->assertSame('Unable to locate Mix file: /js/unknown.app.js.', $message);
+
                     return true;
                 }
             )

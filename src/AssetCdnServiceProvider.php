@@ -2,10 +2,10 @@
 
 namespace Arubacao\AssetCdn;
 
-use Arubacao\AssetCdn\Commands\EmptyCommand;
-use Arubacao\AssetCdn\Commands\SyncCommand;
 use Illuminate\Support\ServiceProvider;
 use Arubacao\AssetCdn\Commands\PushCommand;
+use Arubacao\AssetCdn\Commands\SyncCommand;
+use Arubacao\AssetCdn\Commands\EmptyCommand;
 
 class AssetCdnServiceProvider extends ServiceProvider
 {

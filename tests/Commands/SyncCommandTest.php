@@ -30,8 +30,8 @@ class SyncCommandTest extends TestCase
             'include' => [
                 'paths' => [
                     'js',
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $expectedFiles = [
@@ -56,15 +56,15 @@ class SyncCommandTest extends TestCase
                 'path' => 'css',
                 'filename' => 'front.css',
                 'last_modified' => $time,
-            ]
+            ],
         ]);
 
         $this->setFilesInConfig([
             'include' => [
                 'files' => [
                     'css/front.css',
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $expectedFiles = [
@@ -88,15 +88,15 @@ class SyncCommandTest extends TestCase
             [
                 'path' => 'css',
                 'filename' => 'front.css',
-            ]
+            ],
         ]);
 
         $this->setFilesInConfig([
             'include' => [
                 'files' => [
                     'css/front.css',
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $expectedFiles = [
@@ -126,7 +126,7 @@ class SyncCommandTest extends TestCase
                 'filename' => 'front.css',
                 'base' => __DIR__.'/../testfiles/dummy',
                 'last_modified' => $expectedFileMTime,
-            ]
+            ],
         ]);
 
         $this->assertNotEquals($expectedFileSize,
@@ -138,8 +138,8 @@ class SyncCommandTest extends TestCase
             'include' => [
                 'files' => [
                     'css/front.css',
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $expectedFiles = [
@@ -163,12 +163,12 @@ class SyncCommandTest extends TestCase
             'include' => [
                 'files' => [
                     'css/front.css',
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $expectedOptions = [
-            'foo' => 'bar'
+            'foo' => 'bar',
         ];
 
         $this->app['config']->set('asset-cdn.filesystem.options', $expectedOptions);
@@ -187,6 +187,7 @@ class SyncCommandTest extends TestCase
                     array $options
                 ) use ($expectedOptions) {
                     $this->assertArraySubset($expectedOptions, $options);
+
                     return true;
                 }
             )

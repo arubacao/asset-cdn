@@ -46,7 +46,7 @@ class PushCommand extends BaseCommand
                     $config->get('asset-cdn.filesystem.options')
                 );
 
-            if (!$bool) {
+            if (! $bool) {
                 $this->error("Problem uploading: {$file->getRelativePath()}");
             } else {
                 $this->info("Successfully uploaded: {$file->getRelativePath()}");
