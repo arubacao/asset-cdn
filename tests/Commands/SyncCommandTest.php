@@ -155,4 +155,48 @@ class SyncCommandTest extends TestCase
                 ->size('css/front.css')
         );
     }
+
+    /** @test */
+    public function command_receives_options()
+    {
+        $this->setFilesInConfig([
+            'include' => [
+                'files' => [
+                    'css/front.css',
+                ]
+            ]
+        ]);
+
+        $expectedOptions = [
+            'foo' => 'bar'
+        ];
+
+        $this->app['config']->set('asset-cdn.filesystem.options', $expectedOptions);
+
+        Storage::shouldReceive('disk->allFiles')
+            ->once()
+            ->andReturn([]);
+
+        Storage::shouldReceive('disk->putFileAs')
+            ->once()
+            ->withArgs(
+                function (
+                    string $path,
+                    \Illuminate\Http\File $file,
+                    string $name,
+                    array $options
+                ) use ($expectedOptions) {
+                    $this->assertArraySubset($expectedOptions, $options);
+                    return true;
+                }
+            )
+            ->andReturn('"css/front.css"');
+
+        Storage::shouldReceive('disk->delete')
+            ->once()
+            ->with([])
+            ->andReturn(true);
+
+        Artisan::call('asset-cdn:sync');
+    }
 }

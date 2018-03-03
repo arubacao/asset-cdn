@@ -3,6 +3,7 @@
 namespace Arubacao\AssetCdn\Test\Commands;
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class PushCommandTest extends TestCase
 {
@@ -27,5 +28,40 @@ class PushCommandTest extends TestCase
         Artisan::call('asset-cdn:push');
 
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
+    }
+
+    /** @test */
+    public function command_receives_options()
+    {
+        $this->setFilesInConfig([
+            'include' => [
+                'files' => [
+                    'css/front.css',
+                ]
+            ]
+        ]);
+
+        $expectedOptions = [
+            'foo' => 'bar'
+        ];
+
+        $this->app['config']->set('asset-cdn.filesystem.options', $expectedOptions);
+
+        Storage::shouldReceive('disk->putFileAs')
+            ->once()
+            ->withArgs(
+                function (
+                    string $path,
+                    \Illuminate\Http\File $file,
+                    string $name,
+                    array $options
+                ) use ($expectedOptions) {
+                    $this->assertArraySubset($expectedOptions, $options);
+                    return true;
+                }
+            )
+            ->andReturn('"css/front.css"');
+
+        Artisan::call('asset-cdn:push');
     }
 }
