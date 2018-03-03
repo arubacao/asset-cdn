@@ -17,18 +17,12 @@ php:
 
 env:
   matrix:
-  - TESTBENCH=3.0.* PHPUNIT=~4.8.36
-  - TESTBENCH=3.1.* PHPUNIT=~5.7.21
-  - TESTBENCH=3.2.* PHPUNIT=~5.7.21
-  - TESTBENCH=3.3.* PHPUNIT=~5.7.21
   - TESTBENCH=3.4.* PHPUNIT=~5.7.21
   - TESTBENCH=3.5.* PHPUNIT=~6.0
   - TESTBENCH=3.6.* PHPUNIT=~7.0
 
 matrix:
   exclude:
-    - php: 7.2
-      env: TESTBENCH=3.0.* PHPUNIT=~4.8.36
     - php: 7.0
       env: TESTBENCH=3.6.* PHPUNIT=~7.0
 
