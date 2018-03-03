@@ -1,6 +1,6 @@
 {
     "name": "arubacao/asset-cdn",
-    "description": "TODO",
+    "description": "Serve Laravel Assets from a Content Delivery Network (CDN)",
     "keywords": [
         "todo"
     ],
@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "php": "^7.0"
+        "php": "^7.0",
+        "laravel/framework": "~5.4"
     },
     "require-dev": {
         "league/flysystem-aws-s3-v3": "~1.0",
