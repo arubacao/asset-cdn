@@ -9,7 +9,8 @@ return [
         'disk' => 'asset-cdn',
 
         'options' => [
-
+            'ACL' => 'public-read',
+            'CacheControl' => 'max-age=31536000, public',
         ],
     ],
 

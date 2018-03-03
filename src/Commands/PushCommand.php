@@ -42,7 +42,8 @@ class PushCommand extends BaseCommand
                 ->putFileAs(
                     $file->getRelativePath(),
                     new File($file->getPathname()),
-                    $file->getFilename()
+                    $file->getFilename(),
+                    $config->get('asset-cdn.filesystem.options')
                 );
 
             if (!$bool) {
