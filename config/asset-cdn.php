@@ -4,6 +4,8 @@ return [
 
     'use_cdn' => env('USE_CDN', false),
 
+    'cdn_url' => '',
+
     'filesystem' => [
 
         'disk' => 'asset-cdn',
