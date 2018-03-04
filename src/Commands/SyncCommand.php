@@ -109,7 +109,7 @@ class SyncCommand extends BaseCommand
 
             $md5OfLocal = md5_file($localFile->getRealPath());
 
-            if($md5OfLocal != $md5OfCdn) {
+            if ($md5OfLocal != $md5OfCdn) {
                 return true;
             }
 

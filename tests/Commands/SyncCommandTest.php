@@ -2,7 +2,6 @@
 
 namespace Arubacao\AssetCdn\Test\Commands;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
