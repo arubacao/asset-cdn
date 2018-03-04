@@ -65,9 +65,9 @@ class SyncCommand extends BaseCommand
                 );
 
             if (! $bool) {
-                $this->error("Problem uploading: {$file->getRelativePath()}");
+                $this->error("Problem uploading: {$file->getRelativePathname()}");
             } else {
-                $this->info("Successfully uploaded: {$file->getRelativePath()}");
+                $this->info("Successfully uploaded: {$file->getRelativePathname()}");
             }
         }
 
