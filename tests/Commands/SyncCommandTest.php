@@ -11,7 +11,7 @@ class SyncCommandTest extends TestCase
     /** @test */
     public function command_syncs_all_js_paths_and_deletes_css_files_to_cdn()
     {
-        $this->seedLocalCdnFilesystem([
+        $this->seedCdnFilesystem([
             [
                 'path' => 'js',
                 'filename' => 'back.app.js',
@@ -47,44 +47,9 @@ class SyncCommandTest extends TestCase
     }
 
     /** @test */
-    public function command_syncs_files_with_different_modified_timestamps_but_same_size()
+    public function command_does_not_sync_identical_sync_files()
     {
-        $time = Carbon::createFromFormat('Y-m-d', '2017-01-01')->timestamp;
-
-        $this->seedLocalCdnFilesystem([
-            [
-                'path' => 'css',
-                'filename' => 'front.css',
-                'last_modified' => $time,
-            ],
-        ]);
-
-        $this->setFilesInConfig([
-            'include' => [
-                'files' => [
-                    'css/front.css',
-                ],
-            ],
-        ]);
-
-        $expectedFiles = [
-            'css/front.css',
-        ];
-
-        Artisan::call('asset-cdn:sync');
-
-        $this->assertFilesExistOnCdnFilesystem($expectedFiles);
-
-        $modified = Storage::disk('test_filesystem')
-            ->lastModified('css/front.css');
-
-        $this->assertNotEquals($time, $modified);
-    }
-
-    /** @test */
-    public function command_does_not_sync_files_with_same_timestamps_and_same_size()
-    {
-        $this->seedLocalCdnFilesystem([
+        $this->seedCdnFilesystem([
             [
                 'path' => 'css',
                 'filename' => 'front.css',
@@ -103,29 +68,30 @@ class SyncCommandTest extends TestCase
             'css/front.css',
         ];
 
+        $modifiedBeforeSync = Storage::disk('test_filesystem')
+            ->lastModified('css/front.css');
+
         Artisan::call('asset-cdn:sync');
 
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
 
-        $modified = Storage::disk('test_filesystem')
+        $modifiedAfterSync = Storage::disk('test_filesystem')
             ->lastModified('css/front.css');
 
-        $this->assertEquals(filemtime(public_path('css/front.css')), $modified);
+        $this->assertEquals($modifiedBeforeSync, $modifiedAfterSync);
     }
 
     /** @test */
-    public function command_syncs_files_with_same_modified_timestamps_but_different_size()
+    public function command_syncs_files_with_different_size()
     {
         $src = public_path('css/front.css');
         $expectedFileSize = filesize($src);
-        $expectedFileMTime = filemtime($src);
 
-        $this->seedLocalCdnFilesystem([
+        $this->seedCdnFilesystem([
             [
                 'path' => 'css',
                 'filename' => 'front.css',
                 'base' => __DIR__.'/../testfiles/dummy',
-                'last_modified' => $expectedFileMTime,
             ],
         ]);
 
@@ -153,6 +119,93 @@ class SyncCommandTest extends TestCase
         $this->assertEquals($expectedFileSize,
             Storage::disk('test_filesystem')
                 ->size('css/front.css')
+        );
+    }
+
+    /** @test */
+    public function command_syncs_js_file_with_same_size_but_different_hash()
+    {
+        $src = public_path('js/front.app.js');
+        $expectedHash = md5_file($src);
+
+        $this->seedCdnFilesystem([
+            [
+                'path' => 'js',
+                'filename' => 'front.app.js',
+                'base' => __DIR__.'/../testfiles/dummy',
+            ],
+        ]);
+
+        $this->assertNotEquals($expectedHash,
+            md5(Storage::disk('test_filesystem')
+                ->get('js/front.app.js'))
+        );
+
+        $this->setFilesInConfig([
+            'include' => [
+                'files' => [
+                    'js/front.app.js',
+                ],
+            ],
+        ]);
+
+        $expectedFiles = [
+            'js/front.app.js',
+        ];
+
+        Artisan::call('asset-cdn:sync');
+
+        $this->assertFilesExistOnCdnFilesystem($expectedFiles);
+
+        $this->assertEquals($expectedHash,
+            md5(Storage::disk('test_filesystem')
+                ->get('js/front.app.js'))
+        );
+    }
+
+    /** @test */
+    public function command_syncs_img_file_with_same_size_but_different_hash()
+    {
+        $src = public_path('img/layout/ph3x2.png');
+        $dummySrc = __DIR__.'/../testfiles/dummy/img/layout/ph3x2.png';
+        $expectedHash = md5_file($src);
+        $dummyHash = md5_file($dummySrc);
+
+        $this->assertEquals(filesize($src), filesize($dummySrc));
+        $this->assertNotEquals($expectedHash, $dummyHash);
+
+        $this->seedCdnFilesystem([
+            [
+                'path' => 'img/layout',
+                'filename' => 'ph3x2.png',
+                'base' => __DIR__.'/../testfiles/dummy',
+            ],
+        ]);
+
+        $this->assertNotEquals($expectedHash,
+            md5(Storage::disk('test_filesystem')
+                ->get('img/layout/ph3x2.png'))
+        );
+
+        $this->setFilesInConfig([
+            'include' => [
+                'files' => [
+                    'img/layout/ph3x2.png',
+                ],
+            ],
+        ]);
+
+        $expectedFiles = [
+            'img/layout/ph3x2.png',
+        ];
+
+        Artisan::call('asset-cdn:sync');
+
+        $this->assertFilesExistOnCdnFilesystem($expectedFiles);
+
+        $this->assertEquals($expectedHash,
+            md5(Storage::disk('test_filesystem')
+                ->get('img/layout/ph3x2.png'))
         );
     }
 
