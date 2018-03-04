@@ -19,7 +19,7 @@ class EmptyCommand extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Deletes assets to CDN';
+    protected $description = 'Deletes assets on CDN';
 
     /**
      * Execute the console command.
