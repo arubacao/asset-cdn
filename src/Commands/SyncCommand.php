@@ -93,19 +93,23 @@ class SyncCommand extends BaseCommand
                 return true;
             }
 
-            $lastModifiedOnCdn = $this->filesystemManager
-                ->disk($this->filesystem)
-                ->lastModified($localFilePathname);
-
-            if ($lastModifiedOnCdn != $localFile->getMTime()) {
-                return true;
-            }
-
             $filesizeOfCdn = $this->filesystemManager
                 ->disk($this->filesystem)
                 ->size($localFilePathname);
 
             if ($filesizeOfCdn != $localFile->getSize()) {
+                return true;
+            }
+
+            $md5OfCdn = md5(
+                $this->filesystemManager
+                    ->disk($this->filesystem)
+                    ->get($localFilePathname)
+            );
+
+            $md5OfLocal = md5_file($localFile->getRealPath());
+
+            if($md5OfLocal != $md5OfCdn) {
                 return true;
             }
 
