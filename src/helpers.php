@@ -42,11 +42,7 @@ if (! function_exists('mix_cdn')) {
         $manifest = $manifests[$manifestPath];
 
         if (! isset($manifest[$path])) {
-            report(new Exception("Unable to locate Mix file: {$path}."));
-
-            if (! app('config')->get('app.debug')) {
-                return $path;
-            }
+            throw new Exception("Unable to locate Mix file: {$path}.");
         }
 
         $cdnUrl = config('asset-cdn.cdn_url');

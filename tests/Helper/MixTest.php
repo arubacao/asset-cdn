@@ -2,7 +2,6 @@
 
 namespace Arubacao\AssetCdn\Test\Helper;
 
-use Illuminate\Support\Facades\Log;
 use Arubacao\AssetCdn\Test\TestCase;
 
 class MixTest extends TestCase
@@ -35,18 +34,10 @@ class MixTest extends TestCase
     }
 
     /** @test */
-    public function mix_cdn_reports_exception_with_unknown_file()
+    public function mix_cdn_throws_exception_with_unknown_file()
     {
-        Log::shouldReceive('error')
-            ->once()
-            ->withArgs(
-                function ($message) {
-                    $this->assertSame('Unable to locate Mix file: /js/unknown.app.js.', $message);
-
-                    return true;
-                }
-            )
-            ->andReturnNull();
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Unable to locate Mix file: /js/unknown.app.js.');
         mix_cdn('js/unknown.app.js');
     }
 
