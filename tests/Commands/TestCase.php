@@ -36,33 +36,16 @@ class TestCase extends \Arubacao\AssetCdn\Test\TestCase
     /**
      * @param array $files
      */
-    protected function seedLocalCdnFilesystem($files)
-    {
-        $cdnPath = config('filesystems.disks.test_filesystem.root');
-
-        foreach ($files as $file) {
-            if (! file_exists("{$cdnPath}/{$file['path']}")) {
-                mkdir("{$cdnPath}/{$file['path']}", 0777, true);
-            }
-            $srcPath = $file['base'] ?? public_path();
-            $source = "{$srcPath}/{$file['path']}/{$file['filename']}";
-            $dest = "{$cdnPath}/{$file['path']}/{$file['filename']}";
-            copy($source, $dest);
-            // Preserve modified timestamp of original file
-            touch($dest, $file['last_modified'] ?? filemtime($source));
-        }
-    }
-
-    /**
-     * @param array $files
-     */
     protected function seedCdnFilesystem($files)
     {
         foreach ($files as $file) {
+            $srcPath = $file['base'] ?? public_path();
+            $source = "{$srcPath}/{$file['path']}/{$file['filename']}";
+
             Storage::disk('test_filesystem')
                 ->putFileAs(
                     $file['path'],
-                    new \Illuminate\Http\File(public_path("{$file['path']}/{$file['filename']}")),
+                    new \Illuminate\Http\File($source),
                     $file['filename']
                 );
         }
