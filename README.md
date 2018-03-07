@@ -95,7 +95,7 @@ $ php artisan vendor:publish --provider="Arubacao\AssetCdn\AssetCdnServiceProvid
 ]
 ```
 
-#### 3. Edit `files` in `config/asset-cdn.php`
+#### 4. Edit `files` in `config/asset-cdn.php`
 _Only required if you plan to manage your assets via the provided commands: `asset-cdn:push`, `asset-cdn:sync`, `asset-cdn:empty`_
 
 **`files` always assumes a relative path from the `public` directoy**
@@ -186,7 +186,7 @@ Ignore version control directories.
 Rules are identical as described above.
 
 
-#### 4. Set Additional Configurations for Uploaded Files
+#### 5. Set Additional Configurations for Uploaded Files
 
 `filesystem.options` are passed directly to the [Filesystem](https://github.com/thephpleague/flysystem/blob/1.0.43/src/FilesystemInterface.php#L232) 
 which eventually calls the underlying Storage driver e.g. S3.  
@@ -207,7 +207,7 @@ The following example is recommended for AWS S3.
 ]
 ```
 
-#### 5. Set Environment Variable `USE_CDN`
+#### 6. Set Environment Variable `USE_CDN`
 ```dotenv
 # .env
 
