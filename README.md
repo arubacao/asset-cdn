@@ -109,77 +109,77 @@ Ignore version control directories.
 - `include`  
 **Any** file that matches at least one `include` rule, will be included. **No** file is included by default.
 
-    - `paths`  
-    Define paths that should be available on the CDN.  
-    The following example will match **any** file in **any** `js` or `css` path it can find in the `public` directory.
+    * `paths`  
+Define paths that should be available on the CDN.  
+The following example will match **any** file in **any** `js` or `css` path it can find in the `public` directory.
 
-```php
-'include' => [
-    'paths' => [
-        'js', 
-        'css'
-    ],
-]
+        ```php
+        'include' => [
+            'paths' => [
+                'js', 
+                'css'
+            ],
+        ]
+        
+        /*
+         * This config would try to find:
+         * '/var/www/html/public/js'
+         * '/var/www/html/public/css'
+         * but also any other 'js' or 'css' path e.g.
+         * '/var/www/html/public/vendor/js'
+         * '/var/www/html/public/vendor/css'
+         * You could explicitly exclude paths later
+         */
+        ```
 
-/*
- * This config would try to find:
- * '/var/www/html/public/js'
- * '/var/www/html/public/css'
- * but also any other 'js' or 'css' path e.g.
- * '/var/www/html/public/vendor/js'
- * '/var/www/html/public/vendor/css'
- * You could explicitly exclude paths later
- */
-```
+    * `files`  
+Define files that should be available on the CDN.  
+The following example will match **any** file that starts with `js/back.app.js` in the `public` directory.
 
-    - `files`
-    Define files that should be available on the CDN.  
-    The following example will match **any** file that starts with `js/back.app.js` in the `public` directory.
+        ```php
+        'include' => [
+            'files' => [
+                'js/app.js',
+            ],
+        ],
+        
+        /*
+         * This config would try to find:
+         * '/var/www/html/public/js/app.js'
+         * but also any other file that matches the path + filename e.g.
+         * '/var/www/html/public/vendor/js/app.js'
+         * You could explicitly exclude these files later
+         */
+        ```
 
-```php
-'include' => [
-    'files' => [
-        'js/app.js',
-    ],
-],
-
-/*
- * This config would try to find:
- * '/var/www/html/public/js/app.js'
- * but also any other file that matches the path + filename e.g.
- * '/var/www/html/public/vendor/js/app.js'
- * You could explicitly exclude these files later
- */
-```
-
-    - `extensions`
-    Define filetypes that should be available on the CDN.  
-    The following example will match **any** file of type `*.css` or `*.js` in the `public` directory.
+     * `extensions`  
+Define filetypes that should be available on the CDN.  
+The following example will match **any** file of type `*.css` or `*.js` in the `public` directory.
     
-```php
-'include' => [
-    'extensions' => [
-        '.js',
-        '.css',
-    ],
-],
-```
+        ```php
+        'include' => [
+            'extensions' => [
+                '.js',
+                '.css',
+            ],
+        ],
+        ```
 
-    - `patterns`
-    Define patterns for files that should be available on the CDN.  
-    The following example will match **any** file that starts with letters `a` or `b` in the `public` directory.
+     * `patterns`  
+Define patterns for files that should be available on the CDN.  
+The following example will match **any** file that starts with letters `a` or `b` in the `public` directory.
 
-```php
-/*
- * Patterns can be globs, strings, or regexes
- */
- 
-'include' => [
-    'patterns' => [
-        '/^[a-b]/i', //  starting with letters a-b
-    ],
-],
-```
+        ```php
+        /*
+         * Patterns can be globs, strings, or regexes
+         */
+         
+        'include' => [
+            'patterns' => [
+                '/^[a-b]/i', //  starting with letters a-b
+            ],
+        ],
+        ```
 
 - `exclude`  
 **Any** file that matches at least one `exclude` rule, will be excluded. Files that are excluded will **never** be included, even if they have been explicitly included.
