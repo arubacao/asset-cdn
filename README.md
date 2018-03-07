@@ -110,7 +110,7 @@ Ignore version control directories.
 **Any** file that matches at least one `include` rule, will be included. **No** file is included by default.
 
     * `paths`  
-Define paths that should be available on the CDN.  
+Define **paths** that should be available on the CDN.  
 The following example will match **any** file in **any** `js` or `css` path it can find in the `public` directory.
 
         ```php
@@ -133,7 +133,7 @@ The following example will match **any** file in **any** `js` or `css` path it c
         ```
 
     * `files`  
-Define files that should be available on the CDN.  
+Define **files** that should be available on the CDN.  
 The following example will match **any** file that starts with `js/back.app.js` in the `public` directory.
 
         ```php
@@ -153,20 +153,20 @@ The following example will match **any** file that starts with `js/back.app.js` 
         ```
 
      * `extensions`  
-Define filetypes that should be available on the CDN.  
+Define **filetypes** that should be available on the CDN.  
 The following example will match **any** file of type `*.css` or `*.js` in the `public` directory.
     
         ```php
         'include' => [
             'extensions' => [
-                '.js',
-                '.css',
+                '*.js',
+                '*.css',
             ],
         ],
         ```
 
      * `patterns`  
-Define patterns for files that should be available on the CDN.  
+Define **patterns** for files that should be available on the CDN.  
 The following example will match **any** file that starts with letters `a` or `b` in the `public` directory.
 
         ```php
