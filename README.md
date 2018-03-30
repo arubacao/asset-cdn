@@ -1,4 +1,4 @@
-<p align="center"><img src="https://www.dropbox.com/s/r3i5zt72ugtneou/asset-cdn.png?raw=1"></p>
+<p align="center"><img src="/asset-cdn.png"></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/arubacao/asset-cdn"><img src="https://img.shields.io/packagist/v/arubacao/asset-cdn.svg?style=flat-square" alt="Latest Stable Version"></a>
@@ -8,8 +8,9 @@
 <a href="https://packagist.org/packages/arubacao/asset-cdn"><img src="https://img.shields.io/packagist/dt/arubacao/asset-cdn.svg?style=flat-square" alt="Total Downloads"></a>
 </p>
 
-
+<p align="center">
 **Serve Laravel Assets from a Content Delivery Network (CDN)**
+</p>
 
 ## Introduction
 
@@ -212,7 +213,7 @@ The following example is recommended for AWS S3.
 # .env
 
 USE_CDN=true # Enables asset-cdn
-USE_CDN=false # Disables asset-cdn. (default)
+USE_CDN=false # Disables asset-cdn (default)
 ```
 
 ## Usage
