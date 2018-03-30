@@ -8,9 +8,9 @@
 <a href="https://packagist.org/packages/arubacao/asset-cdn"><img src="https://img.shields.io/packagist/dt/arubacao/asset-cdn.svg?style=flat-square" alt="Total Downloads"></a>
 </p>
 
-<p align="center">
-**Serve Laravel Assets from a Content Delivery Network (CDN)**
-</p>
+<p align="center"><strong>
+Serve Laravel Assets from a Content Delivery Network (CDN)
+</strong></p>
 
 ## Introduction
 
@@ -243,7 +243,7 @@ Replace [`asset()`](https://laravel.com/docs/5.6/helpers#method-asset) with `ass
 
 ## Todo's:
 
- - Write README.MD
+ - Add credits to readme
  - Video Tutorial: How to use S3/Cloudfront 
  - Write test for `ignoreVCS` finder config
  - Write test for `ignoreDotFiles` finder config
