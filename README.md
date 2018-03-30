@@ -1,4 +1,4 @@
-<p align="center"><img src="/asset-cdn.png"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/arubacao/asset-cdn/master/asset-cdn.png"></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/arubacao/asset-cdn"><img src="https://img.shields.io/packagist/v/arubacao/asset-cdn.svg?style=flat-square" alt="Latest Stable Version"></a>
@@ -241,9 +241,12 @@ Replace [`mix()`](https://laravel.com/docs/5.6/helpers#method-mix) with `mix_cdn
 Replace [`asset()`](https://laravel.com/docs/5.6/helpers#method-asset) with `asset_cdn()`.   
 
 
+## Credits:
+Icon from [www.flaticon.com](http://www.flaticon.com/)  
+Unmaintained git repo by [Vinelab](https://github.com/Vinelab/cdn) for inspiration only
+
 ## Todo's:
 
- - Add credits to readme
  - Video Tutorial: How to use S3/Cloudfront 
  - Write test for `ignoreVCS` finder config
  - Write test for `ignoreDotFiles` finder config
