@@ -2,7 +2,10 @@
     "name": "arubacao/asset-cdn",
     "description": "Serve Laravel Assets from a Content Delivery Network (CDN)",
     "keywords": [
-        "todo"
+        "Laravel",
+        "CDN",
+        "Content Delivery Network",
+        "AWS Cloudfront"
     ],
     "homepage": "https://github.com/arubacao/asset-cdn",
     "license": "MIT",
