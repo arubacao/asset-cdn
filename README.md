@@ -228,7 +228,7 @@ $ php artisan asset-cdn:sync
 
 Pushes assets that have been defined in the config to the CDN. Pushes all assets. Does not delete files on CDN.
 ```bash
-$ php artisan asset-cdn:sync
+$ php artisan asset-cdn:push
 ```
 
 Deletes all assets from CDN, independent from config file.
