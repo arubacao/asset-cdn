@@ -11,20 +11,17 @@ cache:
     - $HOME/.composer/cache
 
 php:
-  - 7.0
   - 7.1
   - 7.2
+  - 7.3
 
 env:
   matrix:
   - TESTBENCH=3.4.* PHPUNIT=~5.7.21
   - TESTBENCH=3.5.* PHPUNIT=~6.0
-  - TESTBENCH=3.6.* PHPUNIT=~7.0
-
-matrix:
-  exclude:
-    - php: 7.0
-      env: TESTBENCH=3.6.* PHPUNIT=~7.0
+  - TESTBENCH=3.6.* PHPUNIT=^7.0
+  - TESTBENCH=3.7.* PHPUNIT=^7.0
+  - TESTBENCH=3.8.* PHPUNIT=^7.5
 
 before_install:
   - composer self-update --stable --no-interaction
