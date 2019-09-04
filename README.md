@@ -53,7 +53,7 @@ _Only required for Laravel `<=5.4`, for Laravel `>=5.5` [auto-discovery](compose
 ```
 Notes:  
 
- - `arubacao/asset-cdn` is functional and fully tested for Laravel `5.4` - `5.8` on PHP `7.0`, `7.1`, `7.2`, `7.3`
+ - `arubacao/asset-cdn` is functional and fully tested for Laravel `5.4` - `6.0` on PHP `7.0`, `7.1`, `7.2`, `7.3`
 
 ## Configuration
 
