@@ -2,8 +2,8 @@
 
 namespace Arubacao\AssetCdn;
 
-use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Finder\Finder as SymfonyFinder;
+use Symfony\Component\Finder\SplFileInfo;
 
 class Finder
 {

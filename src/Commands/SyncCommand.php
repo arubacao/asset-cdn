@@ -2,11 +2,11 @@
 
 namespace Arubacao\AssetCdn\Commands;
 
-use Illuminate\Http\File;
 use Arubacao\AssetCdn\Finder;
 use Illuminate\Config\Repository;
-use Symfony\Component\Finder\SplFileInfo;
 use Illuminate\Filesystem\FilesystemManager;
+use Illuminate\Http\File;
+use Symfony\Component\Finder\SplFileInfo;
 
 class SyncCommand extends BaseCommand
 {

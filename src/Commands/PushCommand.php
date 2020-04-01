@@ -2,10 +2,10 @@
 
 namespace Arubacao\AssetCdn\Commands;
 
-use Illuminate\Http\File;
 use Arubacao\AssetCdn\Finder;
 use Illuminate\Config\Repository;
 use Illuminate\Filesystem\FilesystemManager;
+use Illuminate\Http\File;
 
 class PushCommand extends BaseCommand
 {

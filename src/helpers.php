@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Str;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 
 if (! function_exists('mix_cdn')) {
     /**
