@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://packagist.org/packages/arubacao/asset-cdn"><img src="https://img.shields.io/packagist/v/arubacao/asset-cdn.svg?style=flat-square" alt="Latest Stable Version"></a>
-<a href="https://travis-ci.org/arubacao/asset-cdn"><img src="https://img.shields.io/travis/arubacao/asset-cdn/master.svg?style=flat-square" alt="Build Status"></a>
+<a href="https://github.com/arubacao/asset-cdn/actions?query=workflow%3A%22Run+Tests%22"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/arubacao/asset-cdn/Run%20Tests?style=flat-square"></a>
 <a href="https://codecov.io/gh/arubacao/asset-cdn"><img src="https://img.shields.io/codecov/c/github/arubacao/asset-cdn.svg?style=flat-square" alt="Codecov"></a>
 <a href="https://scrutinizer-ci.com/g/arubacao/asset-cdn"><img src="https://img.shields.io/scrutinizer/g/arubacao/asset-cdn.svg?style=flat-square" alt="Quality Score"></a>
 <a href="https://packagist.org/packages/arubacao/asset-cdn"><img src="https://img.shields.io/packagist/dt/arubacao/asset-cdn.svg?style=flat-square" alt="Total Downloads"></a>
