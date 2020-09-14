@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [7.1, 7.2, 7.3]
-        laravel: [5.4.*, 5.5.*, 5.6.*, 5.7.*, 5.8.*, 6.*, 7.*]
+        php: [7.1, 7.2, 7.3, 7.4]
+        laravel: [5.4.*, 5.5.*, 5.6.*, 5.7.*, 5.8.*, 6.*, 7.*, 8.*]
         include:
           - laravel: 5.4.*
             testbench: 3.4.*
@@ -32,11 +32,20 @@ jobs:
           - laravel: 7.*
             testbench: 5.*
             phpunit: ^8.4
+          - laravel: 8.*
+            testbench: 6.*
+            phpunit: ^8.5
         exclude:
           - laravel: 6.*
             php: 7.1
           - laravel: 7.*
             php: 7.1
+          - laravel: 8.*
+            php: 7.1
+          - laravel: 8.*
+            php: 7.2
+          - laravel: 8.*
+            php: 7.3
 
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }}
