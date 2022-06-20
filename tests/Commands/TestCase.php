@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 class TestCase extends \Arubacao\AssetCdn\Test\TestCase
 {
     /**
-     * @param array $expectedFiles
+     * @param  array  $expectedFiles
      */
     protected function assertFilesExistOnCdnFilesystem($expectedFiles)
     {
@@ -34,7 +34,7 @@ class TestCase extends \Arubacao\AssetCdn\Test\TestCase
     }
 
     /**
-     * @param array $files
+     * @param  array  $files
      */
     protected function seedCdnFilesystem($files)
     {
