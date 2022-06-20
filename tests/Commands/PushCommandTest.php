@@ -56,7 +56,7 @@ class PushCommandTest extends TestCase
                     string $name,
                     array $options
                 ) use ($expectedOptions) {
-                    $this->assertArraySubset($expectedOptions, $options);
+                    $this->assertEquals($expectedOptions, $options);
 
                     return true;
                 }
