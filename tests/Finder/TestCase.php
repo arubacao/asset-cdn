@@ -3,6 +3,7 @@
 namespace Arubacao\AssetCdn\Test\Finder;
 
 use Arubacao\AssetCdn\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 class TestCase extends \Arubacao\AssetCdn\Test\TestCase
 {
@@ -14,7 +15,7 @@ class TestCase extends \Arubacao\AssetCdn\Test\TestCase
     {
         $this->setFilesInConfig($fileConfig);
 
-        /** @var \Symfony\Component\Finder\SplFileInfo[] $actualFiles */
+        /** @var SplFileInfo[] $actualFiles */
         $actualFiles = resolve(Finder::class)->getFiles();
         $actualFiles = array_map(function ($file) {
             return $file->getRelativePathname();

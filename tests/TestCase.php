@@ -2,29 +2,27 @@
 
 namespace Arubacao\AssetCdn\Test;
 
+use Arubacao\AssetCdn\AssetCdnServiceProvider;
+use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\TemporaryDirectory\TemporaryDirectory;
 
 abstract class TestCase extends Orchestra
 {
-    /** @var \Spatie\TemporaryDirectory\TemporaryDirectory */
+    /** @var TemporaryDirectory */
     protected $tempDir;
 
     /**
      * Setup the test environment.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
-        $this->tempDir = (new TemporaryDirectory())->create();
+        $this->tempDir = (new TemporaryDirectory)->create();
         parent::setUp();
     }
 
     /**
      * Clean up the testing environment before the next test.
-     *
-     * @return void
      */
     protected function tearDown(): void
     {
@@ -35,25 +33,25 @@ abstract class TestCase extends Orchestra
     /**
      * Get package providers.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      * @return array
      */
     protected function getPackageProviders($app)
     {
         return [
-            \Arubacao\AssetCdn\AssetCdnServiceProvider::class,
+            AssetCdnServiceProvider::class,
         ];
     }
 
     /**
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      */
     protected function getEnvironmentSetUp($app)
     {
-//        $app['config']->set('filesystems.disks.public', [
-//            'driver' => 'local',
-//            'root' => $this->getMediaDirectory(),
-//        ]);
+        //        $app['config']->set('filesystems.disks.public', [
+        //            'driver' => 'local',
+        //            'root' => $this->getMediaDirectory(),
+        //        ]);
         $app['config']->set('app.key', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
         $app['config']->set('filesystems.disks.test_filesystem', [
             'driver' => 'local',
@@ -64,9 +62,7 @@ abstract class TestCase extends Orchestra
         $app['config']->set('asset-cdn.cdn_url', 'http://cdn.localhost');
         $app['config']->set('asset-cdn.filesystem.disk', 'test_filesystem');
 
-        $app->bind('path.public', function () {
-            return __DIR__.'/testfiles/public';
-        });
+        $this->setApplicationPublicPath($app, __DIR__.'/testfiles/public');
     }
 
     protected function setFilesInConfig(array $config)
@@ -100,5 +96,14 @@ abstract class TestCase extends Orchestra
         ];
 
         $this->app->make('config')->set('asset-cdn', $result);
+    }
+
+    protected function setApplicationPublicPath($app, string $path): void
+    {
+        if (method_exists($app, 'usePublicPath')) {
+            $app->usePublicPath($path);
+        }
+
+        $app->instance('path.public', $path);
     }
 }

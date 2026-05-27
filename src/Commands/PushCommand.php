@@ -26,9 +26,7 @@ class PushCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @param  Finder  $finder
-     * @param  FilesystemManager  $filesystemManager
-     * @param  Repository  $config
+     *
      * @return void
      */
     public function handle(Finder $finder, FilesystemManager $filesystemManager, Repository $config)

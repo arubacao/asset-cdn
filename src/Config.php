@@ -7,6 +7,7 @@ use Illuminate\Contracts\Config\Repository;
 class Config
 {
     const INCLUDE = 'include';
+
     const EXCLUDE = 'exclude';
 
     /**
@@ -19,10 +20,6 @@ class Config
      */
     private $publicPath;
 
-    /**
-     * @param  \Illuminate\Contracts\Config\Repository  $config
-     * @param  string  $publicPath
-     */
     public function __construct(Repository $config, string $publicPath)
     {
         $this->config = $config->get('asset-cdn.files');
@@ -111,9 +108,6 @@ class Config
 
     /**
      * Remove any extra slashes '/' from the path.
-     *
-     * @param  string  $path
-     * @return string
      */
     private function cleanPath(string $path): string
     {
@@ -134,9 +128,6 @@ class Config
         return $prefix.preg_replace('/^(?:'.$quoted.')+/u', '', $value);
     }
 
-    /**
-     * @return string
-     */
     public function getPublicPath(): string
     {
         return $this->publicPath;

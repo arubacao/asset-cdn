@@ -9,9 +9,9 @@ if (! function_exists('mix_cdn')) {
      *
      * @param  string  $path
      * @param  string  $manifestDirectory
-     * @return \Illuminate\Support\HtmlString
+     * @return HtmlString
      *
-     * @throws \Exception
+     * @throws Exception
      */
     function mix_cdn($path, $manifestDirectory = '')
     {

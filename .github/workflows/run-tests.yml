@@ -130,6 +130,10 @@ jobs:
       - name: Select test dependencies
         run: composer require --dev "orchestra/testbench:${{ matrix.testbench }}" "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
 
+      - name: Allow Laravel 9 compatibility install
+        if: matrix.laravel-name == '9'
+        run: composer config --no-plugins audit.block-insecure false
+
       - name: Install dependencies
         run: composer update $COMPOSER_FLAGS
 
@@ -158,6 +162,9 @@ jobs:
 
       - name: Select test dependencies
         run: composer require --dev "orchestra/testbench:^7.0" "phpunit/phpunit:^9.5" --no-interaction --no-update
+
+      - name: Allow Laravel 9 compatibility install
+        run: composer config --no-plugins audit.block-insecure false
 
       - name: Install lowest dependencies
         run: composer update $COMPOSER_FLAGS --prefer-lowest --prefer-stable

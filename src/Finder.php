@@ -14,9 +14,6 @@ class Finder
      */
     protected $config;
 
-    /**
-     * @param  Config  $config
-     */
     public function __construct(Config $config)
     {
         $this->config = $config;
@@ -25,7 +22,7 @@ class Finder
     /**
      * Get all of the files from the given directory (recursive).
      *
-     * @return \Symfony\Component\Finder\SplFileInfo[]
+     * @return SplFileInfo[]
      */
     public function getFiles()
     {
@@ -48,8 +45,7 @@ class Finder
     }
 
     /**
-     * @param  \Symfony\Component\Finder\Finder  $pathFinder
-     * @return \Symfony\Component\Finder\SplFileInfo[]
+     * @return SplFileInfo[]
      */
     private function includedPaths(SymfonyFinder $pathFinder): array
     {
@@ -84,8 +80,7 @@ class Finder
     }
 
     /**
-     * @param  \Symfony\Component\Finder\Finder  $nameFinder
-     * @return \Symfony\Component\Finder\SplFileInfo[]
+     * @return SplFileInfo[]
      */
     private function includedNames(SymfonyFinder $nameFinder): array
     {
@@ -157,9 +152,9 @@ class Finder
     }
 
     /**
-     * @param  \Symfony\Component\Finder\SplFileInfo[]  $includedPaths
-     * @param  \Symfony\Component\Finder\SplFileInfo[]  $includedNames
-     * @return \Symfony\Component\Finder\SplFileInfo[]
+     * @param  SplFileInfo[]  $includedPaths
+     * @param  SplFileInfo[]  $includedNames
+     * @return SplFileInfo[]
      */
     private function mergeFileInfos(array $includedPaths, array $includedNames): array
     {

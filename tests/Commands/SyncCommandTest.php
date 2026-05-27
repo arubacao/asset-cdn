@@ -2,6 +2,7 @@
 
 namespace Arubacao\AssetCdn\Test\Commands;
 
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
@@ -234,7 +235,7 @@ class SyncCommandTest extends TestCase
             ->withArgs(
                 function (
                     string $path,
-                    \Illuminate\Http\File $file,
+                    File $file,
                     string $name,
                     array $options
                 ) use ($expectedOptions) {

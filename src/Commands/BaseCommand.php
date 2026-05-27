@@ -15,8 +15,7 @@ use Symfony\Component\Finder\SplFileInfo;
 abstract class BaseCommand extends Command
 {
     /**
-     * @param  \Symfony\Component\Finder\SplFileInfo[]  $files
-     * @return array
+     * @param  SplFileInfo[]  $files
      */
     protected function mapToPathname(array $files): array
     {
