@@ -20,8 +20,8 @@ class Config
     private $publicPath;
 
     /**
-     * @param \Illuminate\Contracts\Config\Repository $config
-     * @param string $publicPath
+     * @param  \Illuminate\Contracts\Config\Repository  $config
+     * @param  string  $publicPath
      */
     public function __construct(Repository $config, string $publicPath)
     {
@@ -112,7 +112,7 @@ class Config
     /**
      * Remove any extra slashes '/' from the path.
      *
-     * @param string $path
+     * @param  string  $path
      * @return string
      */
     private function cleanPath(string $path): string

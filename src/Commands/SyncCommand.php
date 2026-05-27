@@ -37,10 +37,9 @@ class SyncCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @param Finder $finder
-     * @param FilesystemManager $filesystemManager
-     * @param Repository $config
-     *
+     * @param  Finder  $finder
+     * @param  FilesystemManager  $filesystemManager
+     * @param  Repository  $config
      * @return void
      */
     public function handle(Finder $finder, FilesystemManager $filesystemManager, Repository $config)
@@ -81,8 +80,8 @@ class SyncCommand extends BaseCommand
     }
 
     /**
-     * @param string[] $filesOnCdn
-     * @param SplFileInfo[] $localFiles
+     * @param  string[]  $filesOnCdn
+     * @param  SplFileInfo[]  $localFiles
      * @return SplFileInfo[]
      */
     private function filesToSync(array $filesOnCdn, array $localFiles): array
@@ -120,8 +119,8 @@ class SyncCommand extends BaseCommand
     }
 
     /**
-     * @param string[] $filesOnCdn
-     * @param SplFileInfo[] $localFiles
+     * @param  string[]  $filesOnCdn
+     * @param  SplFileInfo[]  $localFiles
      * @return string[]
      */
     private function filesToDelete(array $filesOnCdn, array $localFiles): array

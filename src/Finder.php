@@ -15,7 +15,7 @@ class Finder
     protected $config;
 
     /**
-     * @param Config $config
+     * @param  Config  $config
      */
     public function __construct(Config $config)
     {
@@ -48,13 +48,14 @@ class Finder
     }
 
     /**
-     * @param \Symfony\Component\Finder\Finder $pathFinder
+     * @param  \Symfony\Component\Finder\Finder  $pathFinder
      * @return \Symfony\Component\Finder\SplFileInfo[]
      */
     private function includedPaths(SymfonyFinder $pathFinder): array
     {
         /**
          * Include directories.
+         *
          * @see http://symfony.com/doc/current/components/finder.html#location
          */
         $includedPaths = $this->config->getIncludedPaths();
@@ -64,6 +65,7 @@ class Finder
 
         /**
          * Include Files.
+         *
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
         $includedFiles = $this->config->getIncludedFiles();
@@ -82,13 +84,14 @@ class Finder
     }
 
     /**
-     * @param \Symfony\Component\Finder\Finder $nameFinder
+     * @param  \Symfony\Component\Finder\Finder  $nameFinder
      * @return \Symfony\Component\Finder\SplFileInfo[]
      */
     private function includedNames(SymfonyFinder $nameFinder): array
     {
         /**
          * Include Extensions.
+         *
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
         $includedExtensions = $this->config->getIncludedExtensions();
@@ -98,6 +101,7 @@ class Finder
 
         /**
          * Include Patterns - globs, strings, or regexes.
+         *
          * @see http://symfony.com/doc/current/components/finder.html#file-name
          */
         $includedPatterns = $this->config->getIncludedPatterns();
@@ -153,8 +157,8 @@ class Finder
     }
 
     /**
-     * @param \Symfony\Component\Finder\SplFileInfo[] $includedPaths
-     * @param \Symfony\Component\Finder\SplFileInfo[] $includedNames
+     * @param  \Symfony\Component\Finder\SplFileInfo[]  $includedPaths
+     * @param  \Symfony\Component\Finder\SplFileInfo[]  $includedNames
      * @return \Symfony\Component\Finder\SplFileInfo[]
      */
     private function mergeFileInfos(array $includedPaths, array $includedNames): array

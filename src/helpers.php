@@ -54,7 +54,6 @@ if (! function_exists('mix_cdn')) {
 }
 
 if (! function_exists('asset_cdn')) {
-
     /**
      * Generate an asset path for the application.
      *

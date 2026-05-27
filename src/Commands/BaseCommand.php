@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Christopher
@@ -14,7 +15,7 @@ use Symfony\Component\Finder\SplFileInfo;
 abstract class BaseCommand extends Command
 {
     /**
-     * @param \Symfony\Component\Finder\SplFileInfo[] $files
+     * @param  \Symfony\Component\Finder\SplFileInfo[]  $files
      * @return array
      */
     protected function mapToPathname(array $files): array

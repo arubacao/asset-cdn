@@ -24,9 +24,8 @@ class EmptyCommand extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @param FilesystemManager $filesystemManager
-     * @param Repository $config
-     *
+     * @param  FilesystemManager  $filesystemManager
+     * @param  Repository  $config
      * @return void
      */
     public function handle(FilesystemManager $filesystemManager, Repository $config)

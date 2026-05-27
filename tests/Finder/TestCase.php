@@ -7,8 +7,8 @@ use Arubacao\AssetCdn\Finder;
 class TestCase extends \Arubacao\AssetCdn\Test\TestCase
 {
     /**
-     * @param array $expectedFiles
-     * @param array $fileConfig
+     * @param  array  $expectedFiles
+     * @param  array  $fileConfig
      */
     protected function assertFilesMatchConfig($expectedFiles, $fileConfig)
     {
