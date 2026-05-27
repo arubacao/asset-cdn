@@ -4,8 +4,7 @@ namespace Arubacao\AssetCdn\Test\Finder;
 
 class FileFinderTest extends TestCase
 {
-    /** @test */
-    public function find_three_files()
+    public function test_find_three_files()
     {
         $fileConfigs = [
             0 => [
@@ -39,8 +38,7 @@ class FileFinderTest extends TestCase
         }
     }
 
-    /** @test */
-    public function find_all_fontawesomeotf()
+    public function test_find_all_fontawesomeotf()
     {
         $fileConfigs = [
             0 => [
@@ -70,8 +68,7 @@ class FileFinderTest extends TestCase
         }
     }
 
-    /** @test */
-    public function find_all_fontawesomeotf_exclude_one()
+    public function test_find_all_fontawesomeotf_exclude_one()
     {
         $fileConfigs = [
             0 => [

@@ -75,4 +75,7 @@ fabric.properties
 
 /composer.lock
 /.php_cs.cache
+/.phpunit.cache/
+/.phpstan/
 /coverage/
+/coverage.xml

@@ -6,8 +6,7 @@ use Arubacao\AssetCdn\Test\TestCase;
 
 class MixTest extends TestCase
 {
-    /** @test */
-    public function mix_cdn_falls_back_to_mix_if_disabled()
+    public function test_mix_cdn_falls_back_to_mix_if_disabled()
     {
         $this->app['config']->set('asset-cdn.use_cdn', false);
         $urls = [
@@ -20,8 +19,7 @@ class MixTest extends TestCase
         }
     }
 
-    /** @test */
-    public function mix_cdn_returns_correct_url()
+    public function test_mix_cdn_returns_correct_url()
     {
         $urls = [
             mix_cdn('js/back.app.js'),
@@ -33,16 +31,14 @@ class MixTest extends TestCase
         }
     }
 
-    /** @test */
-    public function mix_cdn_throws_exception_with_unknown_file()
+    public function test_mix_cdn_throws_exception_with_unknown_file()
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Unable to locate Mix file: /js/unknown.app.js.');
         mix_cdn('js/unknown.app.js');
     }
 
-    /** @test */
-    public function mix_cdn_throws_exception_with_no_manifest_file()
+    public function test_mix_cdn_throws_exception_with_no_manifest_file()
     {
         $this->app->bind('path.public', function () {
             return __DIR__.'/../testfiles/dummy';

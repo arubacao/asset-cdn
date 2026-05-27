@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PushCommandTest extends TestCase
 {
-    /** @test */
-    public function command_pushes_all_js_paths_to_cdn()
+    public function test_command_pushes_all_js_paths_to_cdn()
     {
         $this->setFilesInConfig([
             'include' => [
@@ -30,8 +29,7 @@ class PushCommandTest extends TestCase
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
     }
 
-    /** @test */
-    public function command_receives_options()
+    public function test_command_receives_options()
     {
         $this->setFilesInConfig([
             'include' => [
@@ -56,7 +54,7 @@ class PushCommandTest extends TestCase
                     string $name,
                     array $options
                 ) use ($expectedOptions) {
-                    $this->assertArraySubset($expectedOptions, $options);
+                    $this->assertSame($expectedOptions, array_intersect_key($options, $expectedOptions));
 
                     return true;
                 }

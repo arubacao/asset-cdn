@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://packagist.org/packages/arubacao/asset-cdn"><img src="https://img.shields.io/packagist/v/arubacao/asset-cdn.svg?style=flat-square" alt="Latest Stable Version"></a>
-<a href="https://github.com/arubacao/asset-cdn/actions?query=workflow%3A%22Run+Tests%22"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/arubacao/asset-cdn/Run%20Tests?style=flat-square"></a>
+<a href="https://github.com/arubacao/asset-cdn/actions/workflows/run-tests.yml"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/arubacao/asset-cdn/run-tests.yml?style=flat-square"></a>
 <a href="https://codecov.io/gh/arubacao/asset-cdn"><img src="https://img.shields.io/codecov/c/github/arubacao/asset-cdn.svg?style=flat-square" alt="Codecov"></a>
 <a href="https://scrutinizer-ci.com/g/arubacao/asset-cdn"><img src="https://img.shields.io/scrutinizer/g/arubacao/asset-cdn.svg?style=flat-square" alt="Quality Score"></a>
 <a href="https://packagist.org/packages/arubacao/asset-cdn"><img src="https://img.shields.io/packagist/dt/arubacao/asset-cdn.svg?style=flat-square" alt="Total Downloads"></a>
@@ -41,34 +41,28 @@ Install this package via composer:
 $ composer require arubacao/asset-cdn
 ```
 
-Also register the service provider:  
-_Only required for Laravel `<=5.4`, for Laravel `>=5.5` [auto-discovery](composer.json#L45) is enabled._
-```PHP
-// config/app.php
+The service provider is auto-discovered by supported Laravel versions.
 
-'providers' => [
-    // Other Service Providers
-    \Arubacao\AssetCdn\AssetCdnServiceProvider::class,
-],
-```
-Notes:  
+Notes:
 
- - `arubacao/asset-cdn` is functional and fully tested for Laravel `5.4` - `8.*` on PHP `7.0`, `7.1`, `7.2`, `7.3, 7.4`
+- `arubacao/asset-cdn` supports Laravel `9`, `10`, `11`, `12`, and `13`.
+- The minimum supported PHP version is `8.1`; Laravel `13` requires PHP `8.3` or newer.
+- The CI matrix tests the supported Laravel versions with their compatible PHP, Testbench, and PHPUnit versions.
 
 ## Configuration
 
-#### 1. Configure Filesystem 
+#### 1. Configure Filesystem
 
 _Only required if you plan to manage your assets via the provided commands: `asset-cdn:push`, `asset-cdn:sync`, `asset-cdn:empty`_
 
 
-`arubacao/asset-cdn` utilizes [Laravel's Filesystem](https://laravel.com/docs/5.6/filesystem) to **push**, **sync**, **delete** assets to/from the CDN of your choice.
-Therefore, you have to configure and define a filesystem specific for CDN purposes. 
-Please follow the [official documentation]((https://laravel.com/docs/5.6/filesystem)).
+`arubacao/asset-cdn` utilizes [Laravel's Filesystem](https://laravel.com/docs/filesystem) to **push**, **sync**, **delete** assets to/from the CDN of your choice.
+Therefore, you have to configure and define a filesystem specific for CDN purposes.
+Please follow the [official documentation](https://laravel.com/docs/filesystem).
 
 If you plan to use AWS S3/Cloudfront you can use this configuration:
 ```php
-// config/filesystem.php
+// config/filesystems.php
 
 'asset-cdn' => [
     'driver' => 's3',
@@ -237,8 +231,19 @@ $ php artisan asset-cdn:empty
 ```
 
 #### Serving Assets
-Replace [`mix()`](https://laravel.com/docs/5.6/helpers#method-mix) with `mix_cdn()`.   
-Replace [`asset()`](https://laravel.com/docs/5.6/helpers#method-asset) with `asset_cdn()`.   
+Replace `mix()` with `mix_cdn()`.
+Replace `asset()` with `asset_cdn()`.
+
+## Development
+
+```bash
+$ composer test
+$ composer test:phpunit9
+$ composer lint
+$ composer analyse
+```
+
+Quality recommendations are tracked in [QUALITY.md](QUALITY.md).
 
 
 ## Credits:

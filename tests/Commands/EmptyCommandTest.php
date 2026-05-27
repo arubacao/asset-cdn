@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class EmptyCommandTest extends TestCase
 {
-    /** @test */
-    public function command_deletes_all_files_on_cdn()
+    public function test_command_deletes_all_files_on_cdn()
     {
         $this->seedCdnFilesystem([
             [

@@ -4,8 +4,7 @@ namespace Arubacao\AssetCdn\Test\Finder;
 
 class CombinedFinderTest extends TestCase
 {
-    /** @test */
-    public function find_all_included_files()
+    public function test_find_all_included_files()
     {
         $fileConfig = [
             'include' => [
@@ -37,8 +36,7 @@ class CombinedFinderTest extends TestCase
         $this->assertFilesMatchConfig($expectedFiles, $fileConfig);
     }
 
-    /** @test */
-    public function find_all_js_paths_and_backcss_and_robotstxt_exclude_vendor_path_and_backjs()
+    public function test_find_all_js_paths_and_backcss_and_robotstxt_exclude_vendor_path_and_backjs()
     {
         $fileConfig = [
             'include' => [

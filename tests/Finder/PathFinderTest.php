@@ -4,8 +4,7 @@ namespace Arubacao\AssetCdn\Test\Finder;
 
 class PathFinderTest extends TestCase
 {
-    /** @test */
-    public function find_all_js_paths()
+    public function test_find_all_js_paths()
     {
         $fileConfigs = [
             0 => [
@@ -43,8 +42,7 @@ class PathFinderTest extends TestCase
         }
     }
 
-    /** @test */
-    public function find_all_js_paths_exclude_one()
+    public function test_find_all_js_paths_exclude_one()
     {
         $fileConfigs = [
             0 => [
@@ -107,8 +105,7 @@ class PathFinderTest extends TestCase
         }
     }
 
-    /** @test */
-    public function find_sub_path()
+    public function test_find_sub_path()
     {
         $fileConfigs = [
             0 => [
@@ -144,8 +141,7 @@ class PathFinderTest extends TestCase
         }
     }
 
-    /** @test */
-    public function find_multiple_paths()
+    public function test_find_multiple_paths()
     {
         $fileConfigs = [
             0 => [
@@ -185,8 +181,7 @@ class PathFinderTest extends TestCase
         }
     }
 
-    /** @test */
-    public function find_multiple_paths_exclude_one()
+    public function test_find_multiple_paths_exclude_one()
     {
         $fileConfigs = [
             0 => [
@@ -256,8 +251,7 @@ class PathFinderTest extends TestCase
         }
     }
 
-    /** @test */
-    public function find_no_paths()
+    public function test_find_no_paths()
     {
         $fileConfig = [
             'include' => [

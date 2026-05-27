@@ -1,81 +1,228 @@
-name: "Run Tests"
+name: Run Tests
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  COMPOSER_FLAGS: --prefer-dist --no-interaction --no-progress --with-all-dependencies
 
 jobs:
-  test:
-
+  validate:
+    name: Validate Composer
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php: [7.1, 7.2, 7.3, 7.4, 8.0]
-        laravel: [5.4.*, 5.5.*, 5.6.*, 5.7.*, 5.8.*, 6.*, 7.*, 8.*]
-        include:
-          - laravel: 5.4.*
-            testbench: 3.4.*
-            phpunit: ~5.7.21
-          - laravel: 5.5.*
-            testbench: 3.5.*
-            phpunit: ~6.0
-          - laravel: 5.6.*
-            testbench: 3.6.*
-            phpunit: ^7.0
-          - laravel: 5.7.*
-            testbench: 3.7.*
-            phpunit: ^7.0
-          - laravel: 5.8.*
-            testbench: 3.8.*
-            phpunit: ^7.5
-          - laravel: 6.*
-            testbench: 4.*
-            phpunit: ^8.0
-          - laravel: 7.*
-            testbench: 5.*
-            phpunit: ^8.4
-          - laravel: 8.*
-            testbench: 6.*
-            phpunit: ^8.5
-        exclude:
-          - laravel: 6.*
-            php: 7.1
-          - laravel: 7.*
-            php: 7.1
-          - laravel: 8.*
-            php: 7.1
-          - laravel: 8.*
-            php: 7.2
-          - laravel: 8.*
-            php: 7.3
-
-
-    name: P${{ matrix.php }} - L${{ matrix.laravel }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Cache dependencies
-        uses: actions/cache@v1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          path: ~/.composer/cache/files
-          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+          php-version: "8.4"
+          extensions: curl, dom, fileinfo, mbstring, pdo, pdo_sqlite, sqlite, xml, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+  test:
+    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel-name }}
+    runs-on: ubuntu-latest
+    needs: validate
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: "8.1"
+            laravel-name: "9"
+            laravel: "^9.0"
+            testbench: "^7.0"
+            phpunit: "^9.5"
+            phpunit-config: phpunit9.xml.dist
+          - php: "8.2"
+            laravel-name: "9"
+            laravel: "^9.0"
+            testbench: "^7.0"
+            phpunit: "^9.5"
+            phpunit-config: phpunit9.xml.dist
+          - php: "8.1"
+            laravel-name: "10"
+            laravel: "^10.0"
+            testbench: "^8.0"
+            phpunit: "^10.5"
+            phpunit-config: phpunit.xml.dist
+          - php: "8.2"
+            laravel-name: "10"
+            laravel: "^10.0"
+            testbench: "^8.0"
+            phpunit: "^10.5"
+            phpunit-config: phpunit.xml.dist
+          - php: "8.3"
+            laravel-name: "10"
+            laravel: "^10.0"
+            testbench: "^8.0"
+            phpunit: "^10.5"
+            phpunit-config: phpunit.xml.dist
+          - php: "8.2"
+            laravel-name: "11"
+            laravel: "^11.0"
+            testbench: "^9.0"
+            phpunit: "^11.5"
+            phpunit-config: phpunit.xml.dist
+          - php: "8.3"
+            laravel-name: "11"
+            laravel: "^11.0"
+            testbench: "^9.0"
+            phpunit: "^11.5"
+            phpunit-config: phpunit.xml.dist
+          - php: "8.2"
+            laravel-name: "12"
+            laravel: "^12.0"
+            testbench: "^10.0"
+            phpunit: "^11.5"
+            phpunit-config: phpunit.xml.dist
+          - php: "8.3"
+            laravel-name: "12"
+            laravel: "^12.0"
+            testbench: "^10.0"
+            phpunit: "^12.5"
+            phpunit-config: phpunit.xml.dist
+          - php: "8.4"
+            laravel-name: "12"
+            laravel: "^12.0"
+            testbench: "^10.0"
+            phpunit: "^12.5"
+            phpunit-config: phpunit.xml.dist
+          - php: "8.3"
+            laravel-name: "13"
+            laravel: "^13.0"
+            testbench: "^11.0"
+            phpunit: "^12.5"
+            phpunit-config: phpunit.xml.dist
+          - php: "8.4"
+            laravel-name: "13"
+            laravel: "^13.0"
+            testbench: "^11.0"
+            phpunit: "^13.0"
+            phpunit-config: phpunit.xml.dist
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: curl, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, iconv
-          coverage: xdebug
+          extensions: curl, dom, fileinfo, mbstring, pdo, pdo_sqlite, sqlite, xml, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Select Laravel version
+        run: composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+
+      - name: Select test dependencies
+        run: composer require --dev "orchestra/testbench:${{ matrix.testbench }}" "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
 
       - name: Install dependencies
-        run: |
-          composer require "orchestra/testbench:${{ matrix.testbench }}" "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update  --dev
-          composer update --prefer-dist --no-interaction --no-suggest
+        run: composer update $COMPOSER_FLAGS
 
       - name: Execute tests
-        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+        run: vendor/bin/phpunit -c ${{ matrix.phpunit-config }}
+
+  prefer-lowest:
+    name: Prefer Lowest - Laravel 9
+    runs-on: ubuntu-latest
+    needs: validate
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          extensions: curl, dom, fileinfo, mbstring, pdo, pdo_sqlite, sqlite, xml, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Select Laravel version
+        run: composer require "laravel/framework:^9.0" --no-interaction --no-update
+
+      - name: Select test dependencies
+        run: composer require --dev "orchestra/testbench:^7.0" "phpunit/phpunit:^9.5" --no-interaction --no-update
+
+      - name: Install lowest dependencies
+        run: composer update $COMPOSER_FLAGS --prefer-lowest --prefer-stable
+
+      - name: Execute tests
+        run: vendor/bin/phpunit -c phpunit9.xml.dist
+
+  quality:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+    needs: validate
+    continue-on-error: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: curl, dom, fileinfo, mbstring, pdo, pdo_sqlite, sqlite, xml, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer update $COMPOSER_FLAGS
+
+      - name: Check style
+        run: composer lint
+
+      - name: Run static analysis
+        run: composer analyse
+
+  coverage:
+    name: Coverage
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: curl, dom, fileinfo, mbstring, pdo, pdo_sqlite, sqlite, xml, zip
+          coverage: xdebug
+          tools: composer:v2
+
+      - name: Select Laravel version
+        run: composer require "laravel/framework:^13.0" --no-interaction --no-update
+
+      - name: Select test dependencies
+        run: composer require --dev "orchestra/testbench:^11.0" "phpunit/phpunit:^13.0" --no-interaction --no-update
+
+      - name: Install dependencies
+        run: composer update $COMPOSER_FLAGS
+
+      - name: Generate coverage
+        run: composer test:coverage
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v5
         with:
-          file: ./coverage.xml
+          files: ./coverage.xml
+          fail_ci_if_error: false

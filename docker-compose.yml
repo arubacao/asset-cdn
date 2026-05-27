@@ -1,8 +1,9 @@
-version: '2'
-
 services:
   php:
-    build: .
+    build:
+      context: .
+      args:
+        PHP_VERSION: "8.4"
     volumes:
-        - ./:/var/www/html
+      - ./:/var/www/html
     working_dir: /var/www/html

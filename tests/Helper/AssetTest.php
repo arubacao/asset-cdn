@@ -6,8 +6,7 @@ use Arubacao\AssetCdn\Test\TestCase;
 
 class AssetTest extends TestCase
 {
-    /** @test */
-    public function asset_cdn_falls_back_to_asset_if_disabled()
+    public function test_asset_cdn_falls_back_to_asset_if_disabled()
     {
         $this->app['config']->set('asset-cdn.use_cdn', false);
         $urls = [
@@ -19,8 +18,7 @@ class AssetTest extends TestCase
         }
     }
 
-    /** @test */
-    public function asset_cdn_returns_correct_url()
+    public function test_asset_cdn_returns_correct_url()
     {
         $urls = [
             asset_cdn('images/auth-background.jpg'),

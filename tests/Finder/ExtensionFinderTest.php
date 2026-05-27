@@ -4,8 +4,7 @@ namespace Arubacao\AssetCdn\Test\Finder;
 
 class ExtensionFinderTest extends TestCase
 {
-    /** @test */
-    public function find_all_js_and_php_extensions()
+    public function test_find_all_js_and_php_extensions()
     {
         $fileConfigs = [
             0 => [
@@ -38,8 +37,7 @@ class ExtensionFinderTest extends TestCase
         }
     }
 
-    /** @test */
-    public function find_all_js_and_php_extensions_but_exclude_php_again()
+    public function test_find_all_js_and_php_extensions_but_exclude_php_again()
     {
         $fileConfigs = [
             0 => [

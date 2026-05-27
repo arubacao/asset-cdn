@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SyncCommandTest extends TestCase
 {
-    /** @test */
-    public function command_syncs_all_js_paths_and_deletes_css_files_to_cdn()
+    public function test_command_syncs_all_js_paths_and_deletes_css_files_to_cdn()
     {
         $this->seedCdnFilesystem([
             [
@@ -45,8 +44,7 @@ class SyncCommandTest extends TestCase
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
     }
 
-    /** @test */
-    public function command_does_not_sync_identical_sync_files()
+    public function test_command_does_not_sync_identical_sync_files()
     {
         $this->seedCdnFilesystem([
             [
@@ -80,8 +78,7 @@ class SyncCommandTest extends TestCase
         $this->assertEquals($modifiedBeforeSync, $modifiedAfterSync);
     }
 
-    /** @test */
-    public function command_syncs_files_with_different_size()
+    public function test_command_syncs_files_with_different_size()
     {
         $src = public_path('css/front.css');
         $expectedFileSize = filesize($src);
@@ -94,10 +91,11 @@ class SyncCommandTest extends TestCase
             ],
         ]);
 
-        $this->assertNotEquals($expectedFileSize,
+        $this->assertNotEquals(
+            $expectedFileSize,
             Storage::disk('test_filesystem')
                 ->size('css/front.css')
-            );
+        );
 
         $this->setFilesInConfig([
             'include' => [
@@ -115,14 +113,14 @@ class SyncCommandTest extends TestCase
 
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
 
-        $this->assertEquals($expectedFileSize,
+        $this->assertEquals(
+            $expectedFileSize,
             Storage::disk('test_filesystem')
                 ->size('css/front.css')
         );
     }
 
-    /** @test */
-    public function command_syncs_js_file_with_same_size_but_different_hash()
+    public function test_command_syncs_js_file_with_same_size_but_different_hash()
     {
         $src = public_path('js/front.app.js');
         $expectedHash = md5_file($src);
@@ -135,7 +133,8 @@ class SyncCommandTest extends TestCase
             ],
         ]);
 
-        $this->assertNotEquals($expectedHash,
+        $this->assertNotEquals(
+            $expectedHash,
             md5(Storage::disk('test_filesystem')
                 ->get('js/front.app.js'))
         );
@@ -156,14 +155,14 @@ class SyncCommandTest extends TestCase
 
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
 
-        $this->assertEquals($expectedHash,
+        $this->assertEquals(
+            $expectedHash,
             md5(Storage::disk('test_filesystem')
                 ->get('js/front.app.js'))
         );
     }
 
-    /** @test */
-    public function command_syncs_img_file_with_same_size_but_different_hash()
+    public function test_command_syncs_img_file_with_same_size_but_different_hash()
     {
         $src = public_path('img/layout/ph3x2.png');
         $dummySrc = __DIR__.'/../testfiles/dummy/img/layout/ph3x2.png';
@@ -181,7 +180,8 @@ class SyncCommandTest extends TestCase
             ],
         ]);
 
-        $this->assertNotEquals($expectedHash,
+        $this->assertNotEquals(
+            $expectedHash,
             md5(Storage::disk('test_filesystem')
                 ->get('img/layout/ph3x2.png'))
         );
@@ -202,14 +202,14 @@ class SyncCommandTest extends TestCase
 
         $this->assertFilesExistOnCdnFilesystem($expectedFiles);
 
-        $this->assertEquals($expectedHash,
+        $this->assertEquals(
+            $expectedHash,
             md5(Storage::disk('test_filesystem')
                 ->get('img/layout/ph3x2.png'))
         );
     }
 
-    /** @test */
-    public function command_receives_options()
+    public function test_command_receives_options()
     {
         $this->setFilesInConfig([
             'include' => [
@@ -238,7 +238,7 @@ class SyncCommandTest extends TestCase
                     string $name,
                     array $options
                 ) use ($expectedOptions) {
-                    $this->assertArraySubset($expectedOptions, $options);
+                    $this->assertSame($expectedOptions, array_intersect_key($options, $expectedOptions));
 
                     return true;
                 }
